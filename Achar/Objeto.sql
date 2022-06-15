@@ -30,44 +30,40 @@ BEGIN -- Filters
     */
 END
 
-  
-BEGIN TRY
-    BEGIN -- Validations
-      -- Criação da tabela temporária que conterá o conteúdo dos filtros de switch que serão realizados
-      IF EXISTS (SELECT * FROM TEMPDB.SYS.TABLES WHERE NAME LIKE ('#Temp_SelectedObjectTypes%'))
-      BEGIN
-        EXEC ('DROP TABLE #Temp_SelectedObjectTypes')
-      END
-      CREATE TABLE #Temp_SelectedObjectTypes(
-        ObjectType
-          NVARCHAR(2)
-          COLLATE Latin1_General_CI_AS_KS_WS
-      )
 
-      -- Validação de filtros de switch
-      IF (@ShowProcedures = 0 AND
-          @ShowExtendedProcedures  = 0 AND
-          @ShowFunctions  = 0 AND
-          @ShowViews = 0 AND
-          @ShowTables  = 0)
-        INSERT #Temp_SelectedObjectTypes VALUES ('P'), ('X'), ('FN'), ('AF'), ('IF'), ('TF'), ('V'), ('U')
-      IF @ShowProcedures = 1
-        INSERT #Temp_SelectedObjectTypes VALUES ('P')
-      IF @ShowExtendedProcedures = 1
-        INSERT #Temp_SelectedObjectTypes VALUES ('X')
-      IF @ShowFunctions = 1
-        INSERT #Temp_SelectedObjectTypes VALUES ('FN'), ('AF'), ('IF'), ('TF')
-      IF @ShowViews = 1
-        INSERT #Temp_SelectedObjectTypes VALUES ('V')
-      IF @ShowTables = 1
-        INSERT #Temp_SelectedObjectTypes VALUES ('U')
+BEGIN -- Validations
+  -- Criação da tabela temporária que conterá o conteúdo dos filtros de switch que serão realizados
+  IF EXISTS (SELECT * FROM TEMPDB.SYS.TABLES WHERE NAME LIKE ('#Temp_SelectedObjectTypes%'))
+  BEGIN
+    EXEC ('DROP TABLE #Temp_SelectedObjectTypes')
+  END
+  CREATE TABLE #Temp_SelectedObjectTypes(
+    ObjectType
+      NVARCHAR(2)
+      COLLATE Latin1_General_CI_AS_KS_WS
+  )
 
-      -- [TESTE]
-      --SELECT * FROM #Temp_SelectedObjectTypes
-    END
+  -- Validação de filtros de switch
+  IF (@ShowProcedures = 0 AND
+      @ShowExtendedProcedures  = 0 AND
+      @ShowFunctions  = 0 AND
+      @ShowViews = 0 AND
+      @ShowTables  = 0)
+    INSERT #Temp_SelectedObjectTypes VALUES ('P'), ('X'), ('FN'), ('AF'), ('IF'), ('TF'), ('V'), ('U')
+  IF @ShowProcedures = 1
+    INSERT #Temp_SelectedObjectTypes VALUES ('P')
+  IF @ShowExtendedProcedures = 1
+    INSERT #Temp_SelectedObjectTypes VALUES ('X')
+  IF @ShowFunctions = 1
+    INSERT #Temp_SelectedObjectTypes VALUES ('FN'), ('AF'), ('IF'), ('TF')
+  IF @ShowViews = 1
+    INSERT #Temp_SelectedObjectTypes VALUES ('V')
+  IF @ShowTables = 1
+    INSERT #Temp_SelectedObjectTypes VALUES ('U')
+END
 
-
-    BEGIN -- Process Execution
+BEGIN -- Result
+    BEGIN
       SELECT
         a.OBJECT_ID AS 'ID do Objeto',
         a.NAME 'Nome do Objeto',
@@ -94,7 +90,4 @@ BEGIN TRY
         (@SearchForObjectName = '' OR a.NAME LIKE ('%' + @SearchForObjectName + '%')) AND
         (@SearchForParameterName = '' OR b.NAME LIKE ('%' + @SearchForParameterName + '%'))
     END
-END TRY
-BEGIN CATCH
-    PRINT('Ocorreu um erro desconhecido, por favor, tente novamente')
-END CATCH
+END

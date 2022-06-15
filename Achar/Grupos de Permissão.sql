@@ -10,7 +10,7 @@ BEGIN -- Filters
 END
 
 
-BEGIN TRY
+BEGIN -- Return
   SELECT
     MainSelect.IdGrupo,
     MainSelect.[Nome da Permissão],
@@ -41,7 +41,4 @@ BEGIN TRY
     (@SearchForUserInGroup = '' OR MainSelect.[Usuários Nesse Grupo] LIKE ('%| ' + @SearchForUserInGroup + ' |%'))
   ORDER BY
     MainSelect.IdGrupo
-END TRY
-BEGIN CATCH
-    PRINT('Ocorreu um erro desconhecido, por favor, tente novamente')
-END CATCH
+END

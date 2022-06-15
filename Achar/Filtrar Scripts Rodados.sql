@@ -1,15 +1,19 @@
-IF EXISTS(
+-- PRESSIONE [CTRL + SHIFT + M] PARA ESCOLHER OS FILTROS
+-- PRESSIONE F5 APÓS ESCOLHER OS FILTROS PARA FILTRAR
+BEGIN -- Filters
+  DECLARE
+      @ScriptInicioDataInicial AS DATETIME = <Filtrar por: Data Inicial, VARCHAR, NULL>,
+      @ScriptInicioDataFinal AS DATETIME = <Filtrar por: Data Inicial, VARCHAR, NULL>,
+      @ScriptSucesso AS BIT = <Considerar: Apenas Scripts Sucedidos, BIT, NULL>,
+      /****************************************
+      0 - Sort using ASC
+      1 - Sort using DESC
+      ****************************************/
+      @AscDesc AS BIT = NULL
+END
 
-CREATE PROCEDURE usp_lst_FiltrarPorScriptsRodados
-    @ScriptInicioDataInicial AS DATETIME = NULL,
-    @ScriptInicioDataFinal AS DATETIME = NULL,
-    /****************************************
-    0 - Sort using ASC
-    1 - Sort using DESC
-    ****************************************/
-    @AscDesc AS BIT = NULL
-AS
-BEGIN TRY
+
+BEGIN -- Result
   SELECT
     'Nome do Script' = str_NomeScript,
     'Caminho do Script' = str_NomeCompleto,
@@ -25,6 +29,4 @@ BEGIN TRY
   ORDER BY
     (CASE WHEN @AscDesc = 0 THEN str_DataInicio END) ASC,
     (CASE WHEN @AscDesc = 1 THEN str_DataInicio END) DESC 
-END TRY
-BEGIN CATCH
-END CATCH
+END
