@@ -1,26 +1,28 @@
 /******************************************************************************
-		Descrição: 
-			
-            
-		Chamada por:
-            
-			
-		DataBase:
-		OBS:
-			
-			SELECT TYPE, * FROM sysobjects WHERE NAME = 'fn_retornaTotalAliquotas'
+		
+    Nome da Tabela: <Nome da Função, , >
+
+    Descrição: <Breve descrição de para que serve essa função, , >
+
 *******************************************************************************/
 
-if exists (select * from sysobjects where type = 'TF' and name = 'fn_retornaTotalAliquotas')
-	begin
-		print 'Removendo Function fn_retornaTotalAliquotas'
-		drop function fn_retornaTotalAliquotas
-	end
-go
+IF EXISTS (SELECT * FROM SYSOBJECTS WHERE TYPE = 'TF' AND NAME = 'ufn_<Nome da Função, , >')
+	BEGIN
+		PRINT 'Removendo função "ufn_<Nome da Função, , >"...'
+		DROP FUNCTION ufn_<Nome da Função, , >
+	END
+GO
 
-print 'Criando Function fn_retornaTotalAliquotas'
-go
+PRINT 'Criando função "ufn_<Nome da Função, , >"...'
+GO
 
+CREATE FUNCTION ufn_<Nome da Função, , >()
+RETURNS INT
+AS
+BEGIN
 
+/* Colocar código que estará dentro da função substituindo esse comentário */
 
-go
+RETURN 0
+END
+GO

@@ -9,11 +9,16 @@ SELECT TOP 1000 str_DescricaoFarmaLayoutFuncoes, Usuário, str_DescricaoFarmaLayo
 -- (LOG) Verificar últimos bloqueios
 SELECT TOP 1000 str_MessagemErro, int_IdMovimento, dte_DataHoraErro, NomeFantasia, Estado FROM Tab_ErroMovimentoAutomatico WITH(NOLOCK) INNER JOIN Tab_Cadastro ON str_Codinome = Codinome ORDER BY pk_int_Tab_ErroMovimentoAutomatico DESC;
 
+-- Verificar Ultimos itens Integrados
+SELECT TOP 1000 * FROM Tab_FarmaPedido WITH(NOLOCK) ORDER BY pk_int_Tab_FarmaPedido DESC;
+SELECT TOP 1000 * FROM Tab_FarmaPedidoItens WITH(NOLOCK) ORDER BY pk_int_Tab_FarmaPedidoItens DESC;
+
+/**************************************************************************************
+
 -- Procurar na Tab_FarmaPedido pelo Número Pedido do Site
 SELECT TOP 1000 * FROM Tab_FarmaPedido WITH(NOLOCK) WHERE int_NroPedidoSite LIKE '%<(NúmeroPedidoSite) Visualizar Por Número Pedido Site, INT, >%'
 
--- Verificar Ultimos itens Integrados
-SELECT TOP 1000 * FROM Tab_FarmaPedidoItens WITH(NOLOCK) ORDER BY pk_int_Tab_FarmaPedidoItens DESC;
+**************************************************************************************/
 
 /**************************************************************************************
 

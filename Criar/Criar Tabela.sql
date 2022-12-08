@@ -1,15 +1,22 @@
 /**********************************************************************
-		Descrição: 
+		
+    Nome da Tabela: Tab_<Nome da Tabela, , >
+
+    Descrição: <Breve descrição de para que serve essa tabela, , >
 			
-		OBS: 
+		OBS: <(Não Obrigatório) Telas onde é usada e outras informações e anotações adicionais, , >
 						
 **********************************************************************/
 
-if not exists (select * from sys.tables where name = '<table_name>')
-	begin
-		print 'Criando Tabela <table_name>'
+IF NOT EXISTS (SELECT * FROM SYS.TABLES WHERE NAME = 'Tab_<Nome da Tabela, , >')
+	BEGIN
+		PRINT 'Criando a tabela "Tab_<Nome da Tabela, , >"...'
 
-		/* Colocar código da criação da tabela sem o 'Go' no final das instruções */
+    CREATE TABLE Tab_<Nome da Tabela, , >
+    (
+      pk_int_<Nome da Tabela, , > INT NOT NULL IDENTITY(1,1),
+	    constraint PK_Tab_<Nome da Tabela, , > PRIMARY KEY (pk_int_<Nome da Tabela, , >)
+    )
 		
-	end
-go
+	END
+GO

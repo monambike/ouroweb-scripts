@@ -1,39 +1,27 @@
 /**********************************************************************
-		Descrição: 
-			
-			
-		Chamada por:
-			
 
-		DataBase: 
-		OBS: 
+    Nome da Procedure: usp_<Nome da Procedure, , >
+
+    Descrição: <Breve descrição de para que serve essa procedure, , >
 			
+		OBS: <(Não Obrigatório) Telas e lugares onde é usada e outras informações e anotações adicionais, , >
 			
 **********************************************************************/
 
-If Exists (Select * From Sysobjects Where Type = 'p' And name = 'sp_mng_totalvendasvendedor_bonif')
-	Begin
-		Print 'Removendo Procedure sp_mng_totalvendasvendedor_bonif'
-		Drop Procedure sp_mng_totalvendasvendedor_bonif
-	End
-Go
+IF EXISTS (SELECT * FROM SYSOBJECTS WHERE TYPE = 'P' AND NAME = 'usp_<Nome da Procedure, , >')
+	BEGIN
+		PRINT 'Removendo procedure "usp_<Nome da Procedure, , >"...'
+		DROP PROCEDURE usp_<Nome da Procedure, , >
+	END
+GO
 
-Print 'Criando Procedure sp_mng_totalvendasvendedor_bonif'
-Go
-					
+PRINT 'Criando procedure "usp_<Nome da Procedure, , >"...'
+GO
 
+CREATE PROCEDURE usp_<Nome da Procedure, , >
+AS
 
+/* Colocar código de criação da procedure substituindo esse comentário */
 
-
-
-
-
-
-
-
-
-Go
-
-Grant Exec On sp_mng_totalvendasvendedor_bonif To Public
-
-Go
+GRANT EXEC ON usp_<Nome da Procedure, , > TO PUBLIC
+GO

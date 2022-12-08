@@ -1,16 +1,15 @@
 /**********************************************************************
-		Descrição: 
-			
-					
-		OBS: 
+
+		Nome da Tabela: <Nome da Tabela, , >
+
+		Nome da Coluna: <Nome da Coluna, , >
 						
 **********************************************************************/
 
-if not exists (select * from syscolumns where id = object_id('<table_name>') and name in('<column_name>'))
-	begin
-		print 'Criando a(s) coluna(s) (<column_name>, <column_name>)'
-		
-		/* Colocar código da criação das colunas sem o 'Go' no final das instruções */
+IF NOT EXISTS (SELECT * FROM SYSCOLUMNS WHERE ID = OBJECT_ID('<Nome da Tabela, , >') AND NAME IN('<Nome da Coluna, , >'))
+	BEGIN
+		PRINT 'Criando a(s) colunas(s) "<Nome da Coluna, , >"...'
 
-	end
-go
+		ALTER TABLE <Nome da Tabela, , > ADD <Nome da Coluna, , >
+	END
+GO
