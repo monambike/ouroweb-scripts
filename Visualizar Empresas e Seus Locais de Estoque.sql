@@ -8,17 +8,17 @@
 **************************************************************************************/
 
 SELECT
-  [a].[IdEmpresa],
-  [a].[Empresa],
-  [b].[IdLocal],
-  [b].[DescriçãoLocal],
-  [a].[IdLocalEstoquePadrão],
-  [a].[Estado],
-  [c].[Cidade],
-  [a].[País],
-  [a].[Endereço],
-  [a].[Bairro],
-  [a].[str_complemento]
+  [a].[IdEmpresa]            AS [IdEmpresa],
+  [a].[Empresa]              AS [Empresa],
+  [b].[IdLocal]              AS [IdLocal],
+  [b].[DescriçãoLocal]       AS [DescriçãoLocal],
+  [a].[IdLocalEstoquePadrão] AS [IdLocalEstoquePadrão],
+  [a].[Estado]               AS [Estado],
+  [c].[Cidade]               AS [Cidade],
+  [a].[País]                 AS [País],
+  [a].[Endereço]             AS [Endereço],
+  [a].[Bairro]               AS [Bairro],
+  [a].[str_complemento]      AS [Complemento]
 FROM
   [Tab_Empresa] AS [a]
   INNER JOIN
