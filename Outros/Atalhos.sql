@@ -1,3 +1,0 @@
--->Caminho para Gerenciador de Modelos:
---C:\Users\DVP04\AppData\Roaming\Microsoft\SQL Server Management Studio\13.0\Templates\Sql\Custom
---Pegar o valor do database atual - CurrentProject.Connection.Properties(Initial Catalog)
