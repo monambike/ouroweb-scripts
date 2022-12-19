@@ -23,3 +23,27 @@ from
 where
 	a.name like '%ser%' and
 	b.name = 'Tab_TiposMovimentos'
+
+
+
+  select	
+	'Field'			= a.name,
+	'Type'			= c.name,
+	'Size'			= (case
+										when c.name IN ('char', 'ntext', 'text', 'varchar') then convert(varchar, a.max_length)
+										when c.name IN ('nchar', 'nvarchar') then convert(varchar, a.max_length / 2)
+										else ''
+								end),
+	'Nullable'	= a.is_nullable	,
+	'NomeTabela' = b.name
+from
+	sys.columns as a with(nolock)
+		inner join
+	sys.tables as b with(nolock)
+			on a.object_id = b.object_id
+		inner join
+	sys.types as c with(nolock)
+			on a.user_type_id = c.user_type_id
+where
+	a.name like '%ser%' and
+	b.name = 'Tab_TiposMovimentos'
