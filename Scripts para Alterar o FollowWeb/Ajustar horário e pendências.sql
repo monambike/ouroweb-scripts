@@ -1,6 +1,6 @@
 DECLARE
     @IdUsuario AS INT   = 1226 -- (Meu usuário)
-  , @IdPendencia AS INT = '<ID da Pendência, INT, >'
+  , @IdPendencia AS INT = ''
   , @Data AS DATETIME   = ''   -- Formato da Data [yyyy-MM-dd]
 
 SELECT
@@ -38,19 +38,19 @@ ORDER BY CAST([pendenciahora].[HoraInicio] AS TIME)
 
 
   [DELETAR HORA]
-  BEGIN TRAN DELETE FROM Pendencias_Horas WHERE IdPendenciaHoras = '<ID do Registro de Hora da Pendência, INT, >'
+  BEGIN TRAN DELETE FROM Pendencias_Horas WHERE IdPendenciaHoras = '<(Alterar) ID do Registro de Hora da Pendência, INT, >'
 
   [ATUALIZAR APONTAMENTO]
   [Atualizar Hora]
-  BEGIN TRAN UPDATE Pendencias_Horas SET HoraInicio = '1900-01-01 14:17:43.000' WHERE IdPendenciaHoras = '<ID do Registro de Hora da Pendência, INT, >'
-  BEGIN TRAN UPDATE Pendencias_Horas SET HoraFim = '1899-12-30 15:41:12.000' WHERE IdPendenciaHoras = '<ID do Registro de Hora da Pendência, INT, >'
+  BEGIN TRAN UPDATE Pendencias_Horas SET HoraInicio = '1900-01-01 14:17:43.000' WHERE IdPendenciaHoras = '<(Alterar) ID do Registro de Hora da Pendência, INT, >'
+  BEGIN TRAN UPDATE Pendencias_Horas SET HoraFim = '1899-12-30 15:41:12.000' WHERE IdPendenciaHoras = '<(Alterar) ID do Registro de Hora da Pendência, INT, >'
   [Atualizar Tipo Apontamento]
-  BEGIN TRAN UPDATE Pendencias_Horas SET IdTipoHora = 6 WHERE IdPendenciaHoras = '<ID do Registro de Hora da Pendência, INT, >'
+  BEGIN TRAN UPDATE Pendencias_Horas SET IdTipoHora = 6 WHERE IdPendenciaHoras = '<(Alterar) ID do Registro de Hora da Pendência, INT, >'
 
 
   [ATUALIZAR PENDENCIA]
   [Trocar a Pasta]
-  BEGIN TRAN UPDATE Pendencias SET IdNode = 1656 WHERE IdPendencia = '<ID da Pendência, INT, >'
+  BEGIN TRAN UPDATE Pendencias SET IdNode = 1656 WHERE IdPendencia = '<(Alterar) ID da Pendência, INT, >'
 
 
                                         COMMIT            ROLLBACK
