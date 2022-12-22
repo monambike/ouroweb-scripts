@@ -3,16 +3,16 @@
     Nome da Tabela: <Nome da View, , >
 
     Descrição: <Breve descrição de para que serve essa view, , >
-			
-		OBS: <(Não Obrigatório) Telas onde é usada e outras informações e anotações adicionais, , >
-		 
+
+    OBS: <(Não Obrigatório) Telas onde é usada e outras informações e anotações adicionais, , >
+
 **************************************************************************************/
 
 IF EXISTS (SELECT * FROM SYSOBJECTS WHERE TYPE = 'V' AND NAME = 'uvw_<Nome da View, , >')
-	BEGIN
-		PRINT 'Removendo a view "uvw_<Nome da View, , >"...'
-	    DROP VIEW uvw_<Nome da View, , >
-	END
+  BEGIN
+    PRINT 'Removendo a view "uvw_<Nome da View, , >"...'
+      DROP VIEW uvw_<Nome da View, , >
+  END
 GO
 
 PRINT 'Criando a view "uvw_<Nome da View, , >"...'

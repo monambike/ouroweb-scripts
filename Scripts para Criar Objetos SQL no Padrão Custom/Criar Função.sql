@@ -1,5 +1,5 @@
 /******************************************************************************
-		
+
     Nome da Tabela: <Nome da Função, , >
 
     Descrição: <Breve descrição de para que serve essa função, , >
@@ -7,10 +7,10 @@
 *******************************************************************************/
 
 IF EXISTS (SELECT * FROM SYSOBJECTS WHERE TYPE = 'TF' AND NAME = 'ufn_<Nome da Função, , >')
-	BEGIN
-		PRINT 'Removendo função "ufn_<Nome da Função, , >"...'
-		DROP FUNCTION ufn_<Nome da Função, , >
-	END
+  BEGIN
+    PRINT 'Removendo função "ufn_<Nome da Função, , >"...'
+    DROP FUNCTION ufn_<Nome da Função, , >
+  END
 GO
 
 PRINT 'Criando função "ufn_<Nome da Função, , >"...'
@@ -19,10 +19,10 @@ GO
 CREATE FUNCTION ufn_<Nome da Função, , >()
 RETURNS INT
 AS
-BEGIN
+  BEGIN
 
-/* Colocar código que estará dentro da função substituindo esse comentário */
+    /* Colocar código que estará dentro da função substituindo esse comentário */
 
-RETURN 0
+  RETURN 0
 END
 GO
