@@ -1,43 +1,39 @@
-declare @IdRelatorioGrupo int,
-@NomeRelatorio nvarchar(100),
-@DescricaoRelatorio nvarchar(100),
-@NomeGrupo nvarchar(40)
+/**************************************************************************************
 
-set @NomeRelatorio = 'Rel_Relatorio de Insumos Comodato'				
-set @DescricaoRelatorio = 'Relatório de Insumos Comodato'	
-set @NomeGrupo = 'Comercial'							
-set @IdRelatorioGrupo = (select 
-													IdRelatorioGrupo
-													from 
-														Tab_RelatoriosGrupo 
-													where  
-														(Descricao = @NomeGrupo)
-                         )
-delete from 
-	Tab_Relatorios 
-where 
-	(NomeRelatorio = @NomeRelatorio)
-insert into 
-	Tab_Relatorios (
-		NomeRelatorio, 
-		Descricao, 
-		IdRelatorioGrupo, 
-		Ativo
-	) values (
-		@NomeRelatorio, 
-		@DescricaoRelatorio, 
-		@IdRelatorioGrupo, 
-		1)
-delete from 
-	Tab_SeçõesReports 
-where 
-	(NomeReport = @NomeRelatorio)
-insert into 
-	Tab_SeçõesReports(
-		NomeReport, 
-		IdSeçãoReport
-	) values (
-		@NomeRelatorio, 
-		0)
-GO
+  Pressione [CTRL]+[SHIFT]+[M] para definir os valores e parâmetros a serem utilizados
+  nesse template.
+
+  DESCRIPTION
+  -------------------------------------------------------------------------------------
+  Esse Script tem como objetivo facilitar a atualização ou inclusão de um relatório no
+  menu de relatório (Relatórios Gerais).
+
+
+  SELECTED PARAMETERS (UPDATE)
+  -------------------------------------------------------------------------------------
+  Nome do Relatório:      "<Nome do Relatório, NVARCHAR, >"
+  Descrição do Relatório: "<Descrição do Relatório, NVARCHAR, >"
+  Nome do grupo:          "<Nome do Grupo do Relatório, NVARCHAR, >"
+
+**************************************************************************************/
+
+DECLARE
+  @NomeRelatorio      AS NVARCHAR(MAX) = '<Nome do Relatório, NVARCHAR, >',
+  @DescricaoRelatorio AS NVARCHAR(MAX) = '<Descrição do Relatório, NVARCHAR, >',
+  @NomeGrupo          AS NVARCHAR(MAX) = '<Nome do Grupo do Relatório, NVARCHAR, >'
+
+DECLARE @IdRelatorioGrupo AS INT = (SELECT
+                                      [IdRelatorioGrupo]
+                                    FROM 
+                                      [Tab_Relatorios] 
+                                    WHERE  
+                                      [Descricao] = @NomeGrupo)
+
+
+DELETE FROM [Tab_Relatorios] WHERE ([NomeRelatorio] = @NomeRelatorio)
+INSERT INTO [Tab_Relatorios] ([NomeRelatorio], [Descricao], [IdRelatorioGrupo], [Ativo])
+VALUES (@NomeRelatorio, @DescricaoRelatorio, @IdRelatorioGrupo, 1)
+
+DELETE FROM [Tab_SeçõesReports] WHERE ([NomeReport] = @NomeRelatorio)
+INSERT INTO [Tab_SeçõesReports] ([NomeReport], [IdSeçãoReport]) VALUES (@NomeRelatorio, 0)
 
