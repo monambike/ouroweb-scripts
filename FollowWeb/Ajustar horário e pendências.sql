@@ -30,7 +30,7 @@ WHERE
   AND ((@Data = '' AND FORMAT(GETDATE(), 'yyyy-MM-dd') = [pendenciahora].Data) OR (@Data = [pendenciahora].Data))
 ORDER BY CAST([pendenciahora].[HoraInicio] AS TIME)
 
-/*************************************************************************************************************************
+/**************************************************************************************
 
   [Visualizar Tipos de Hora]
   SELECT [IdTipoHora], [DescricaoTipoHora], [Ativo] FROM Tipo_Horas WITH(NOLOCK)
@@ -53,6 +53,6 @@ ORDER BY CAST([pendenciahora].[HoraInicio] AS TIME)
   BEGIN TRAN UPDATE Pendencias SET IdNode = 1656 WHERE IdPendencia = '<(Alterar) ID da Pendência, INT, >'
 
 
-                                        COMMIT            ROLLBACK
+                              COMMIT            ROLLBACK                               
 
-*************************************************************************************************************************/
+/**************************************************************************************
