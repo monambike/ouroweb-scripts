@@ -17,11 +17,11 @@ SELECT
 FROM
   [Pendencias_Horas] AS [pendenciahora] WITH(NOLOCK)
   INNER JOIN
-  [Usuarios] AS [usuario] WITH(NOLOCK) ON [pendenciahora].[IdUsuarioResp] = [usuario].[IdUsuario]
+  [Usuarios]         AS [usuario]       WITH(NOLOCK) ON [pendenciahora].[IdUsuarioResp] = [usuario].[IdUsuario]
   INNER JOIN
-  [Pendencias] AS [pendencia] WITH(NOLOCK) ON [pendenciahora].[IdPendencia] = [pendencia].[IdPendencia]
+  [Pendencias]       AS [pendencia]     WITH(NOLOCK) ON [pendenciahora].[IdPendencia]   = [pendencia].[IdPendencia]
   INNER JOIN
-  [Tipo_Horas] AS [tipohora] WITH(NOLOCK) ON [pendenciahora].[IdTipoHora] = [tipohora].[IdTipoHora]
+  [Tipo_Horas]       AS [tipohora]      WITH(NOLOCK) ON [pendenciahora].[IdTipoHora]    = [tipohora].[IdTipoHora]
   INNER JOIN
   [Nodes] AS [node] WITH(NOLOCK) ON [node].[IdNode] = [pendencia].[IdNode]
 WHERE

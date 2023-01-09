@@ -25,14 +25,19 @@ FROM Tab_FarmaConfig AS a WHERE a.int_TipoIntegracao = 3 ORDER BY a.str_Descrica
 -- Menu Superior > Integrações > Integração Farma > Configuração Farma
 --------------- + --------------- + --------------- + --------------- + ---------------
 
-DECLARE @RootPathIntegracaoFarma AS VARCHAR(50) = '<Caminho Pasta Integração Farma, VARCHAR(50), C:\FTP\PDVLink201\>'
+DECLARE @NomeIntegracaoPasta     AS VARCHAR(MAX) = '<Nome da Integração, VARCHAR(MAX), >'
+DECLARE @CaminhoPastaIntegracoes AS VARCHAR(MAX) = '<Caminho Pasta Integração Farma, VARCHAR(MAX), C:\FTP>'
+
+-- Caminho Selecionado: "<Caminho Pasta Integração Farma, VARCHAR(MAX), C:\FTP>\<Nome da Integração, VARCHAR(MAX), >"
+DECLARE @CaminhoPastaIntegracao  AS VARCHAR(MAX) = @CaminhoPastaIntegracoes + '\' + @NomeIntegracaoPasta
+
 BEGIN TRAN UPDATE Tab_FarmaConfig
-SET str_DiretorioBackup      = @RootPathIntegracaoFarma + 'Backup',
-    str_DiretorioEntrada     = @RootPathIntegracaoFarma + 'Entrada',
-    str_DiretorioErro        = @RootPathIntegracaoFarma + 'Erro',
-    str_DiretorioNF          = @RootPathIntegracaoFarma + 'NFE',
-    str_DiretorioSaida       = @RootPathIntegracaoFarma + 'Saida',
-    str_DiretorioTemporario  = @RootPathIntegracaoFarma + 'TMP'
+SET str_DiretorioBackup      = @CaminhoPastaIntegracoes + 'Backup',  -- <Caminho Pasta Integração Farma, VARCHAR(MAX), C:\FTP>\<Nome da Integração, VARCHAR(MAX), >\Backup
+    str_DiretorioEntrada     = @CaminhoPastaIntegracoes + 'Entrada', -- <Caminho Pasta Integração Farma, VARCHAR(MAX), C:\FTP>\<Nome da Integração, VARCHAR(MAX), >\Entrada
+    str_DiretorioErro        = @CaminhoPastaIntegracoes + 'Erro',    -- <Caminho Pasta Integração Farma, VARCHAR(MAX), C:\FTP>\<Nome da Integração, VARCHAR(MAX), >\Erro
+    str_DiretorioNF          = @CaminhoPastaIntegracoes + 'NFE',     -- <Caminho Pasta Integração Farma, VARCHAR(MAX), C:\FTP>\<Nome da Integração, VARCHAR(MAX), >\NFE
+    str_DiretorioSaida       = @CaminhoPastaIntegracoes + 'Saida',   -- <Caminho Pasta Integração Farma, VARCHAR(MAX), C:\FTP>\<Nome da Integração, VARCHAR(MAX), >\Saida
+    str_DiretorioTemporario  = @CaminhoPastaIntegracoes + 'TMP'      -- <Caminho Pasta Integração Farma, VARCHAR(MAX), C:\FTP>\<Nome da Integração, VARCHAR(MAX), >\TMP
 WHERE pk_int_FarmaConfig = '<PkIntFarmaConfig, INT, >'
 
                         COMMIT                       ROLLBACK
