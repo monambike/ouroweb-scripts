@@ -22,24 +22,36 @@ FROM Tab_FarmaConfig AS a WHERE a.int_TipoIntegracao = 3 ORDER BY a.str_Descrica
 /**************************************************************************************
 
 -- CONFIGURAR INTEGRAÇÃO POR ARQUIVO
--- Menu Superior > Integrações > Integração Farma > Configuração Farma
 --------------- + --------------- + --------------- + --------------- + ---------------
-
-DECLARE @NomeIntegracaoPasta     AS VARCHAR(MAX) = '<Nome da Integração, VARCHAR(MAX), >'
-DECLARE @CaminhoPastaIntegracoes AS VARCHAR(MAX) = '<Caminho Pasta Integração Farma, VARCHAR(MAX), C:\FTP>'
-
--- Caminho Selecionado: "<Caminho Pasta Integração Farma, VARCHAR(MAX), C:\FTP>\<Nome da Integração, VARCHAR(MAX), >"
-DECLARE @CaminhoPastaIntegracao  AS VARCHAR(MAX) = @CaminhoPastaIntegracoes + '\' + @NomeIntegracaoPasta
-
+-- Execute essa consulta para atualizar as pastas da integração da tela de configuração Farma (referente a tabela Tab_FarmaConfig)
+-- (Menu Superior > Integrações > Integração Farma > Configuração Farma)
 BEGIN TRAN UPDATE Tab_FarmaConfig
-SET str_DiretorioBackup      = @CaminhoPastaIntegracoes + 'Backup',  -- <Caminho Pasta Integração Farma, VARCHAR(MAX), C:\FTP>\<Nome da Integração, VARCHAR(MAX), >\Backup
-    str_DiretorioEntrada     = @CaminhoPastaIntegracoes + 'Entrada', -- <Caminho Pasta Integração Farma, VARCHAR(MAX), C:\FTP>\<Nome da Integração, VARCHAR(MAX), >\Entrada
-    str_DiretorioErro        = @CaminhoPastaIntegracoes + 'Erro',    -- <Caminho Pasta Integração Farma, VARCHAR(MAX), C:\FTP>\<Nome da Integração, VARCHAR(MAX), >\Erro
-    str_DiretorioNF          = @CaminhoPastaIntegracoes + 'NFE',     -- <Caminho Pasta Integração Farma, VARCHAR(MAX), C:\FTP>\<Nome da Integração, VARCHAR(MAX), >\NFE
-    str_DiretorioSaida       = @CaminhoPastaIntegracoes + 'Saida',   -- <Caminho Pasta Integração Farma, VARCHAR(MAX), C:\FTP>\<Nome da Integração, VARCHAR(MAX), >\Saida
-    str_DiretorioTemporario  = @CaminhoPastaIntegracoes + 'TMP'      -- <Caminho Pasta Integração Farma, VARCHAR(MAX), C:\FTP>\<Nome da Integração, VARCHAR(MAX), >\TMP
-WHERE pk_int_FarmaConfig = '<PkIntFarmaConfig, INT, >'
-
+SET
+    [str_DiretorioBackup]     = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Backup'
+  , [str_DiretorioEntrada]    = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Entrada'
+  , [str_DiretorioErro]       = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Erro'
+  , [str_DiretorioNF]         = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\NFE'
+  , [str_DiretorioSaida]      = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Saida'
+  , [str_DiretorioTemporario] = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\TMP'
+WHERE pk_int_FarmaConfig = '<(UPDATE Tab_FarmaConfig) PkIntFarmaConfig, INT, >'
                         COMMIT                       ROLLBACK
+
+
+-- CRIAR PASTAS DA INTEGRAÇÃO POR ARQUIVO
+--------------- + --------------- + --------------- + --------------- + ---------------
+-- Execute essa consulta e jogue no Promp de Comando (CMD) para criar as pastas da
+-- integração no local desejado
+
+SELECT
+  'MD'
+    + ' ' + '"' + '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Backup'  + '"'
+    + ' ' + '"' + '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Entrada' + '"'
+    + ' ' + '"' + '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Erro'    + '"'
+    + ' ' + '"' + '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\NFE'     + '"'
+    + ' ' + '"' + '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Saida'   + '"'
+    + ' ' + '"' + '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\TMP'     + '"'
+  + ' ' + '&' + 'START <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>'
+     AS [Comando CMD (Copie e execute no Prompt de Comando, ou seja o CMD, para criar as pastas da integração).]
+
 
 **************************************************************************************/

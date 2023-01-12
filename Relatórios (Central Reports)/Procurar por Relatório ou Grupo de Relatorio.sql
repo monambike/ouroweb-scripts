@@ -12,38 +12,37 @@
   SELECTED FILTERS
   -------------------------------------------------------------------------------------
   Mostrando relatórios que..
-  Possuem nome ou descrição:            "<Filtrar por: Nome/Descrição do Relatório, VARCHAR, >"
-  Relatório ativos ou inativos:         "<Filtrar por: Relatórios Ativos, VARCHAR, >"
-  Relatórios do grupo:                  "<Filtrar por: Grupo do Relatório, VARCHAR, >"
-  Relatórios do grupo ativo ou inativo: "<Filtrar por: Grupos de Relatório Ativos, VARCHAR, >"
+  Possuem nome ou descrição:            "<Filtrar por: Nome/Descrição do Relatório, VARCHAR(MAX), >"
+  Relatório ativos ou inativos:         "<Filtrar por: Relatórios Ativos, BIT, >"
+  Relatórios do grupo:                  "<Filtrar por: Grupo do Relatório, VARCHAR(MAX), >"
+  Relatórios do grupo ativo ou inativo: "<Filtrar por: Grupos de Relatório Ativos, BIT, >"
 
 **************************************************************************************/
 
 DECLARE
   -- Relatório
-  @SearchForRelatoryNameDescription AS VARCHAR(MAX) = '<Filtrar por: Nome/Descrição do Relatório, VARCHAR, >',
-  @ShowActiveRelatories             AS VARCHAR(MAX) = '<Filtrar por: Relatórios Ativos, VARCHAR, >',
+    @SearchForRelatoryNameDescription AS VARCHAR(MAX) = '<Filtrar por: Nome/Descrição do Relatório, VARCHAR(MAX), >'
+  , @ShowActiveRelatories             AS VARCHAR(MAX) = '<Filtrar por: Relatórios Ativos, BIT, >'
   -- Grupo do Relatório
-  @SearchForRelatoryGroup           AS VARCHAR(MAX) = '<Filtrar por: Grupo do Relatório, VARCHAR, >',
-  @ShowActiveRelatoryGroups         AS VARCHAR(MAX) = '<Filtrar por: Grupos de Relatório Ativos, VARCHAR, >'
+  , @SearchForRelatoryGroup           AS VARCHAR(MAX) = '<Filtrar por: Grupo do Relatório, VARCHAR(MAX), >'
+  , @ShowActiveRelatoryGroups         AS VARCHAR(MAX) = '<Filtrar por: Grupos de Relatório Ativos, BIT, >'
 
 
 SELECT 
-  [a].[NomeRelatorio] AS [Nome do Relatório], 
-  [a].[Descricao]     AS [Descrição do Relatório], 
-  [a].[Ativo]         AS [Relatório Ativo],
-  [b].[Descricao]     AS [Grupo],
-  [b].[bit_Ativo]     AS [Grupo Ativo]
+    [relatorio].[NomeRelatorio] AS [Nome do Relatório]
+  , [relatorio].[Descricao]     AS [Descrição do Relatório]
+  , [relatorio].[Ativo]         AS [Relatório Ativo]
+  , [grupo].[Descricao]         AS [Grupo]
+  , [grupo].[bit_Ativo]         AS [Grupo Ativo]
 FROM
-  [Tab_Relatorios] AS [a]
-    INNER JOIN
-  [Tab_RelatoriosGrupo] AS [b]
-      ON [a].[IdRelatorioGrupo] = [b].[IdRelatorioGrupo]
+  [Tab_Relatorios]      AS [relatorio] WITH(NOLOCK)
+  INNER JOIN
+  [Tab_RelatoriosGrupo] AS [grupo]     WITH(NOLOCK) ON [relatorio].[IdRelatorioGrupo] = [grupo].[IdRelatorioGrupo]
 WHERE
   (@SearchForRelatoryNameDescription = ''
-    OR (([a].[NomeRelatorio] + [a].[Descricao]) LIKE ('%' + @SearchForRelatoryNameDescription + '%')))
-  AND (@SearchForRelatoryGroup   = ''    OR [b].[Descricao] LIKE ('%' + @SearchForRelatoryGroup + '%'))
-  AND (@ShowActiveRelatories     = '' OR [a].[Ativo] = @ShowActiveRelatories)
-  AND (@ShowActiveRelatoryGroups = '' OR [b].[bit_Ativo] = @ShowActiveRelatoryGroups)
+    OR ([relatorio].[NomeRelatorio] + [relatorio].[Descricao] LIKE ('%' + @SearchForRelatoryNameDescription + '%')))
+  AND (@SearchForRelatoryGroup   = '' OR [grupo].[Descricao] LIKE ('%' + @SearchForRelatoryGroup + '%'))
+  AND (@ShowActiveRelatories     = '' OR [relatorio].[Ativo] = @ShowActiveRelatories)
+  AND (@ShowActiveRelatoryGroups = '' OR [grupo].[bit_Ativo] = @ShowActiveRelatoryGroups)
 ORDER BY
   [Descrição do Relatório]

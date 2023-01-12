@@ -1,10 +1,12 @@
+-- [APAGUE ESSE COMENTÁRIO] Pressione "CTRL + SHIFT + M"
 /**********************************************************************
 
-    Nome da Tabela: tr_<Nome da Trigger, , >
+  Nome da Tabela: tr_<Nome da Trigger, , >
+  Sugestão de Nome do Script: XXX - Criar_Trigger_<Nome da Trigger, , >
 
-    Descrição: <Breve descrição de para que serve essa Trigger, , >
+  Descrição: <Breve descrição de para que serve essa Trigger, , >
 
-    OBS: <(Não Obrigatório) Telas onde é usada e outras informações e anotações adicionais, , >
+  OBS: <(Não Obrigatório) Telas onde é usada e outras informações e anotações adicionais, , >
 
 **********************************************************************/
 

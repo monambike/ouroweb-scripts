@@ -1,5 +1,12 @@
+/******************************************************************************
+
+  Pressione [CTRL]+[SHIFT]+[M] para definir os parâmetros e valores a serem utilizados
+  nesse template.
+
+******************************************************************************/
+
 declare @NomeTabela as varchar(200)
-set @NomeTabela = 'Tab_AgendamentoCirurgia' --<< Insira o nome da tabela aqui!
+set @NomeTabela = '<Nome da Tabela, , >'
 
 declare @Parametros as varchar(max)
 declare @NomeParametro as varchar(200)

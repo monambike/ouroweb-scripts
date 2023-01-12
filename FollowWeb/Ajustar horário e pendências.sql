@@ -1,7 +1,7 @@
 DECLARE
-    @IdUsuario AS INT   = 1226 -- (Meu usuário)
-  , @IdPendencia AS INT = ''
-  , @Data AS DATETIME   = ''   -- Formato da Data [yyyy-MM-dd]
+    @IdUsuario   AS INT      = 1226 -- (Meu usuário)
+  , @IdPendencia AS INT      = ''
+  , @Data        AS DATETIME = ''   -- Formato da Data [yyyy-MM-dd]
 
 SELECT
     [pendenciahora].[IdPendenciaHoras] AS [IdPendenciaHoras]
@@ -23,7 +23,7 @@ FROM
   INNER JOIN
   [Tipo_Horas]       AS [tipohora]      WITH(NOLOCK) ON [pendenciahora].[IdTipoHora]    = [tipohora].[IdTipoHora]
   INNER JOIN
-  [Nodes] AS [node] WITH(NOLOCK) ON [node].[IdNode] = [pendencia].[IdNode]
+  [Nodes]            AS [node]          WITH(NOLOCK) ON [node].[IdNode]                 = [pendencia].[IdNode]
 WHERE
   ([pendenciahora].IdUsuarioResp = @IdUsuario)
   AND (@IdPendencia = '' OR [pendenciahora].IdPendencia = @IdPendencia)

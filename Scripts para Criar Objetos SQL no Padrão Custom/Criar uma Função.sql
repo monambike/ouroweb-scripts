@@ -1,8 +1,10 @@
+-- [APAGUE ESSE COMENTÁRIO] Pressione "CTRL + SHIFT + M"
 /******************************************************************************
 
-    Nome da Tabela: <Nome da Função, , >
+  Nome da Tabela: <Nome da Função, , >
+  Sugestão de Nome do Script: XXX - Criar_Funcao_<Nome da Função, , >
 
-    Descrição: <Breve descrição de para que serve essa função, , >
+  Descrição: <Breve descrição de para que serve essa função, , >
 
 *******************************************************************************/
 

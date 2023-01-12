@@ -1,8 +1,13 @@
-/*
-Referências..: https://stackoverflow.com/questions/5873170/generate-class-from-database-table
-*/
+/******************************************************************************
 
-declare @TableName sysname = 'Table_Name'
+  Pressione [CTRL]+[SHIFT]+[M] para definir os parâmetros e valores a serem utilizados
+  nesse template.
+
+  Referências: https://stackoverflow.com/questions/5873170/generate-class-from-database-table
+
+******************************************************************************/
+
+declare @TableName sysname = '<Nome da Tabela, , >'
 declare @Result varchar(max) = ''
 
 set @Result = '///<sumary>
