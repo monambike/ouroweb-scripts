@@ -1,103 +1,83 @@
-DECLARE @nomeTabela AS VARCHAR(100) = 'Tab_ConfiguracaoAlertaRegistroContas_Usuarios'
+/******************************************************************************
 
+  Pressione [CTRL]+[SHIFT]+[M] para definir os parâmetros e valores a serem utilizados
+  nesse template.
 
-SELECT
-	'Fields'	= 'private ' + (CASE c.NAME
-                              WHEN 'bigint' THEN 'Int64?'
-                              WHEN 'bit' THEN 'bool?'
-                              WHEN 'char' THEN 'string'
-                              WHEN 'datetime' THEN 'DateTime?'
-                              WHEN 'decimal' THEN 'decimal?'
-                              WHEN 'float' THEN 'double?'
-                              WHEN 'varbinary' THEN 'Byte[]'
-                              WHEN 'image' THEN 'Byte[]'
-                              WHEN 'int' THEN 'int?'
-                              WHEN 'money' THEN 'decimal?'
-                              WHEN 'nchar' THEN 'string'
-                              WHEN 'ntext' THEN 'string'
-                              WHEN 'numeric' THEN 'decimal?'
-                              WHEN 'nvarchar' THEN 'string'
-                              WHEN 'smalldatetime' THEN 'DateTime?'
-                              WHEN 'smallint' THEN 'Int16?'
-                              WHEN 'text' THEN 'string'
-                              WHEN 'tinyint' THEN 'Byte?'
-                              WHEN 'varchar' THEN 'string'
-                              ELSE 'null'
-                            END) + ' ' + dbo.AjustaNomeCampoFramework(a.NAME, 1) + ';',
-	'Properties'	= '/// <summary>' + CHAR(13) + CHAR(10) +
-							    '/// Representa o campo ' + a.NAME + ' da tabela ' + b.NAME + '.' + CHAR(13) + CHAR(10) +
-							    '/// </summary>' + CHAR(13) + CHAR(10) +
-							    '[DataMember]' + CHAR(13) + CHAR(10) +
-                  '[DataField("' + dbo.AjustaNomeCampoFramework(a.NAME, DEFAULT) + '"' + (CASE WHEN a.is_identity = 1 THEN ', PrimaryKey = true' ELSE '' END) + ', FieldNameTable = "' + a.NAME + '"' +
-								    (CASE c.NAME 
-										   WHEN 'char' THEN ', MaxLength = ' + CONVERT(VARCHAR, a.max_length)
-										   WHEN 'nchar' THEN ', MaxLength = ' + CONVERT(VARCHAR, a.max_length / 2)
-										   WHEN 'ntext' THEN ', MaxLength = ' + CONVERT(VARCHAR, a.max_length)
-										   WHEN 'nvarchar' THEN ', MaxLength = ' + CONVERT(VARCHAR, a.max_length / 2)
-										   WHEN 'text' THEN ', MaxLength = ' + CONVERT(VARCHAR, a.max_length)
-										   WHEN 'varchar' THEN ', MaxLength = ' + CONVERT(VARCHAR, a.max_length) ELSE '' END) + 
-								    (CASE c.NAME 
-										   WHEN 'char' THEN (CASE WHEN a.is_nullable = 1 THEN ', AllowNull = true' ELSE '' END)
-										   WHEN 'nchar' THEN (CASE WHEN a.is_nullable = 1 THEN ', AllowNull = true' ELSE '' END)
-										   WHEN 'ntext' THEN (CASE WHEN a.is_nullable = 1 THEN ', AllowNull = true' ELSE '' END)
-										   WHEN 'nvarchar' THEN (CASE WHEN a.is_nullable = 1 THEN ', AllowNull = true' ELSE '' END)
-										   WHEN 'text' THEN (CASE WHEN a.is_nullable = 1 THEN ', AllowNull = true' ELSE '' END)
-										   WHEN 'varchar' THEN (CASE WHEN a.is_nullable = 1 THEN ', AllowNull = true' ELSE '' END) ELSE '' END) + ')]' + CHAR(13) + CHAR(10) +
-							    '[DbParameter(DbType.' + (CASE c.NAME
-																					    WHEN 'bigint' THEN 'Int64'
-																					    WHEN 'bit' THEN 'Boolean'
-																					    WHEN 'char' THEN 'String'
-																					    WHEN 'datetime' THEN 'DateTime'
-																					    WHEN 'decimal' THEN 'Decimal'
-																					    WHEN 'float' THEN 'Double'
-																					    WHEN 'varbinary' THEN 'Binary'
-																					    WHEN 'image' THEN 'Binary'
-																					    WHEN 'int' THEN 'Int32'
-																					    WHEN 'money' THEN 'Decimal'
-																					    WHEN 'nchar' THEN 'StringFixedLength'
-																					    WHEN 'ntext' THEN 'String'
-																					    WHEN 'numeric' THEN 'Decimal'
-																					    WHEN 'nvarchar' THEN 'String'
-																					    WHEN 'smalldatetime' THEN 'DateTime'
-																					    WHEN 'smallint' THEN 'Int16'
-																					    WHEN 'text' THEN 'String'
-																					    WHEN 'tinyint' THEN 'Byte'
-																					    WHEN 'varchar' THEN 'String'
-																					    ELSE 'null'
-																				   END) + ', ParameterDirection.Input, Name = "' + dbo.AjustaNomeCampoFramework(a.NAME, DEFAULT) + '")]' + CHAR(13) + CHAR(10) +
-							    'public ' + (CASE c.NAME
-														     WHEN 'bigint' THEN 'Int64?'
-														     WHEN 'bit' THEN 'bool?'
-														     WHEN 'char' THEN 'string'
-														     WHEN 'datetime' THEN 'DateTime?'
-														     WHEN 'decimal' THEN 'decimal?'
-														     WHEN 'float' THEN 'double?'
-														     WHEN 'varbinary' THEN 'Byte[]'
-														     WHEN 'image' THEN 'Byte[]'
-														     WHEN 'int' THEN 'int?'
-														     WHEN 'money' THEN 'decimal?'
-														     WHEN 'nchar' THEN 'string'
-														     WHEN 'ntext' THEN 'string'
-														     WHEN 'numeric' THEN 'decimal?'
-														     WHEN 'nvarchar' THEN 'string'
-														     WHEN 'smalldatetime' THEN 'DateTime?'
-														     WHEN 'smallint' THEN 'Int16?'
-														     WHEN 'text' THEN 'string'
-														     WHEN 'tinyint' THEN 'Byte?'
-														     WHEN 'varchar' THEN 'string'
-														     ELSE 'null'
-													     END) + ' ' + dbo.AjustaNomeCampoFramework(a.NAME, DEFAULT) + 
-							    ' { get { return ' + dbo.AjustaNomeCampoFramework(a.NAME, 1) +' ;} set { ' + dbo.AjustaNomeCampoFramework(a.NAME, 1) + ' = value; OnPropertyChanged(); } }' + CHAR(13) + CHAR(10) +
-                  CHAR(13) + CHAR(10)
-FROM
-	SYS.COLUMNS AS a WITH(NOLOCK)
-		INNER JOIN
-	SYS.TABLES AS b WITH(NOLOCK)
-			ON a.OBJECT_ID = b.OBJECT_ID
-		INNER JOIN
-	sys.TYPES AS c WITH(NOLOCK)
-		  ON a.user_type_id = c.user_type_id
-WHERE
-	b.NAME = @nomeTabela
-ORDER BY
-	a.column_id
+  Referências: https://stackoverflow.com/questions/5873170/generate-class-from-database-table
+
+******************************************************************************/
+
+declare @TableName sysname = '<Nome da Tabela, , >'
+declare @Result varchar(max) = ''
+
+set @Result = '///<sumary>
+///<sumary>Entidade que representa a tabela (' + @TableName + ')
+///<sumary>
+'
+set @Result = @Result + 'public class ' + @TableName + '
+{'
+
+select
+	@Result = @Result + '
+		///<sumary>
+		///<sumary>Propriedade que representa o campo (' + ColumnName + ')
+		///<sumary>
+		public ' + ColumnType + NullableSign + ' ' + ColumnName + ' { get; set; }
+'
+from
+(
+    select
+        replace(col.name, ' ', '_') as ColumnName,
+        column_id as ColumnId,
+        case typ.name
+            when 'bigint' then 'long'
+            when 'binary' then 'byte[]'
+            when 'bit' then 'bool'
+            when 'char' then 'string'
+            when 'date' then 'DateTime'
+            when 'datetime' then 'DateTime'
+            when 'datetime2' then 'DateTime'
+            when 'datetimeoffset' then 'DateTimeOffset'
+            when 'decimal' then 'decimal'
+            when 'float' then 'float'
+            when 'image' then 'byte[]'
+            when 'int' then 'int'
+            when 'money' then 'decimal'
+            when 'nchar' then 'string'
+            when 'ntext' then 'string'
+            when 'numeric' then 'decimal'
+            when 'nvarchar' then 'string'
+            when 'real' then 'double'
+            when 'smalldatetime' then 'DateTime'
+            when 'smallint' then 'short'
+            when 'smallmoney' then 'decimal'
+            when 'text' then 'string'
+            when 'time' then 'TimeSpan'
+            when 'timestamp' then 'DateTime'
+            when 'tinyint' then 'byte'
+            when 'uniqueidentifier' then 'Guid'
+            when 'varbinary' then 'byte[]'
+            when 'varchar' then 'string'
+            else 'UNKNOWN_' + typ.name
+        end as ColumnType,
+        case
+          when col.is_nullable = 1 and typ.name in ('bigint', 'bit', 'date', 'datetime', 'datetime2', 'datetimeoffset', 'decimal', 'float', 'int', 'money', 'numeric', 'real', 'smalldatetime', 'smallint', 'smallmoney', 'time', 'tinyint', 'uniqueidentifier')
+            then '?'
+          else ''
+        end as NullableSign
+    from
+			sys.columns col
+        join
+			sys.types typ
+					on col.system_type_id = typ.system_type_id
+					and col.user_type_id = typ.user_type_id
+    where
+			object_id = object_id(@TableName)
+) t
+order by ColumnId
+
+set @Result = @Result  + '
+}'
+
+print @Result
+--select @Result
