@@ -18,7 +18,7 @@ AS
 BEGIN
   DECLARE @Routines VARCHAR(MAX) = '| '
 
-  SELECT @Routines += CAST(IdRotina AS VARCHAR(10)) + ' | ' FROM [Rotinas_Direitos_Usuario] WHERE [IdGrupo] = @IdGrupo GROUP BY [IdRotina]
+  SELECT @Routines += CAST([IdRotina] AS VARCHAR(MAX)) + ' | ' FROM [Rotinas_Direitos_Usuario] WHERE [IdGrupo] = @IdGrupo GROUP BY [IdRotina]
   IF @Routines = '| ' SET @Routines = ''
 
   RETURN @Routines
@@ -32,41 +32,44 @@ CREATE FUNCTION GetUsers (@IdGrupo AS INT)
 RETURNS VARCHAR(MAX)
 AS
 BEGIN
-  DECLARE @Usuarios VARCHAR(MAX) = '| '
+  DECLARE @Users VARCHAR(MAX) = '| '
 
-  SELECT @Usuarios += CAST(IdUsuario AS VARCHAR(10)) + ' | ' FROM [Usuarios_Grupos] WHERE [IdGrupo] = @IdGrupo GROUP BY [IdUsuario]
-  IF @Usuarios = '| ' SET @Usuarios = ''
+  SELECT @Users += CAST(IdUsuario AS VARCHAR(MAX)) + ' | ' FROM [Usuarios_Grupos] WHERE [IdGrupo] = @IdGrupo GROUP BY [IdUsuario]
+  IF @Users = '| ' SET @Users = ''
 
-  RETURN @Usuarios
+  RETURN @Users
 END
 GO
 
 
 DECLARE
     @SearchForPermissionGroupName AS VARCHAR(MAX) = '<Filtrar por: Nome do Grupo da Permissão, VARCHAR, >'
-  , @SearchForRoutineInGroup      AS VARCHAR(MAX) = '<Filtrar por: Rotina no Grupo, VARCHAR, >'
-  , @SearchForUserInGroup         AS VARCHAR(MAX) = '<Filtrar por: Usuário no Grupo, VARCHAR, >'
+  , @SearchForPermissionInGroup      AS VARCHAR(MAX) = '<Filtrar por: Número da Permissão no Grupo, VARCHAR, >'
+  , @SearchForUserInGroup         AS VARCHAR(MAX) = '<Filtrar por: Número do Usuário no Grupo, VARCHAR, >'
 
 SELECT
-    [main_select].[IdGrupo]              AS [IdGrupo]
-  , [main_select].[Nome da Permissão]    AS [Nome da Permissão]
-  , [main_select].[Rotinas Nesse Grupo]  AS [Rotinas Nesse Grupo]
-  , [main_select].[Usuários Nesse Grupo] AS [Usuários Nesse Grupo]
+    [main_select].[IdGrupo]            AS [IdGrupo]
+  , [main_select].[NomeGrupoPermissao] AS [Nome do Grupo da Permissão (Nome da Rotina)]
+  , [main_select].[PermissoesNoGrupo]  AS [Permissões Nesse Grupo]
+  , [main_select].[UsuariosDoGrupo]    AS [Usuários Pertencentes à esse Grupo]
 FROM
 (
   SELECT
       [grupo].[IdGrupo]                      AS [IdGrupo]
-    , [grupo].[DescricaoGrupo]               AS [Nome da Permissão]
-    , [dbo].[GetRoutines]([grupo].[IdGrupo]) AS [Rotinas Nesse Grupo]
-    , [dbo].[GetUsers]([grupo].[IdGrupo])    AS [Usuários Nesse Grupo]
+    , [grupo].[DescricaoGrupo]               AS [NomeGrupoPermissao]
+    , [dbo].[GetRoutines]([grupo].[IdGrupo]) AS [PermissoesNoGrupo]
+    , [dbo].[GetUsers]([grupo].[IdGrupo])    AS [UsuariosDoGrupo]
   FROM
-    [Grupos_Usuarios]          AS [grupo] WITH(NOLOCK)
+    [Grupos_Usuarios] AS [grupo] WITH(NOLOCK)
   GROUP BY [grupo].[IdGrupo], [grupo].[DescricaoGrupo]
 ) AS [main_select]
 WHERE
-  (@SearchForPermissionGroupName = '' OR [main_select].[Nome da Permissão]    LIKE ('%'   + @SearchForPermissionGroupName + '%'))
-  AND (@SearchForRoutineInGroup  = '' OR [main_select].[Rotinas Nesse Grupo]  LIKE ('%| ' + @SearchForRoutineInGroup      + ' |%'))
-  AND (@SearchForUserInGroup     = '' OR [main_select].[Usuários Nesse Grupo] LIKE ('%| ' + @SearchForUserInGroup         + ' |%'))
+      (@SearchForPermissionGroupName IN ('', CHAR(60) + 'Filtrar por: Nome do Grupo da Permissão, VARCHAR, '   + CHAR(62))
+         OR [main_select].[NomeGrupoPermissao] LIKE ('%'   + @SearchForPermissionGroupName + '%'))
+  AND (@SearchForPermissionInGroup   IN ('', CHAR(60) + 'Filtrar por: Número da Permissão no Grupo, VARCHAR, ' + CHAR(62))
+         OR [main_select].[PermissoesNoGrupo]  LIKE ('%| ' + @SearchForPermissionInGroup      + ' |%'))
+  AND (@SearchForUserInGroup         IN ('', CHAR(60) + 'Filtrar por: Número do Usuário no Grupo, VARCHAR, '   + CHAR(62))
+         OR [main_select].[UsuariosDoGrupo]    LIKE ('%| ' + @SearchForUserInGroup         + ' |%'))
 ORDER BY
   [main_select].[IdGrupo]
 GO
