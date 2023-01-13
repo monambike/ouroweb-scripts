@@ -10,6 +10,10 @@ Scripts para facilitar a busca, entendimento e gerenciamento para teste e desenv
 
 :clipboard: Central Reports, facilitar a busca por relatórios e adicionar um relatório no menu;
 
-:chains: Integração Farma, configurar caminhos e criar as pastas da integração e liberar o movimento para processamento da rotina do automático.
+:chains: Integração Farma, configurar caminhos e criar as pastas da integração e liberar o movimento para processamento da rotina do automático;
+
+:closed_lock_with_key: Scripts para facilitar a busca por permissão e grupos de permissão;
+
+:gear: Scripts para facilitar a busca por configuração;
 
 Também há alguns utilitários como evitar travamento do OuroWeb na inicialização evitando com que seja executada a procedure de fechamento dos itens do mês e facilitar a criação de Scripts de criação de função, procedure, coluna e tabela no padrão OuroWeb.
