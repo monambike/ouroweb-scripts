@@ -2,7 +2,7 @@
 
 Scripts para facilitar a busca, entendimento e gerenciamento para teste e desenvolvimento em alguns aplicativos da OuroWeb incluindo:
 
-:hammer: CCE, configuração, sites dos integradores e credenciais para logar;
+:woman_judge: CCE, configuração, sites dos integradores e credenciais para logar;
 
 :bank: CNAB; visualizar títulos e fazer com que um título possa ser baixado novamente na leitura do CNAB para gerar outro arquivo de retorno;
 
