@@ -75,19 +75,19 @@ SELECT
 , [cliente].[pk_int_Mov_EpharmaMovePedidoDadosCliente]                             AS [PK Cliente]
 , [clinico].[pk_int_Mov_EpharmaMovePedidoDadosClinicos]                            AS [PK Clinico]
 FROM
-  Mov_EpharmaMovePedido                           AS [pedido]
+  [Mov_EpharmaMovePedido]                           AS [pedido]
   FULL JOIN
-  Mov_EpharmaMovePedidoItens                      AS [item]                  ON [pedido].[pk_int_Mov_EpharmaMovePedido] = [item].[fk_int_Mov_EpharmaMovePedido]
+  [Mov_EpharmaMovePedidoItens]                      AS [item]                  ON [pedido].[pk_int_Mov_EpharmaMovePedido] = [item].[fk_int_Mov_EpharmaMovePedido]
   FULL JOIN
-  Mov_EpharmaMovePedidoDadosBeneficiario          AS [beneficiario]          ON [beneficiario].[fk_int_Mov_EpharmaMovePedido] = [pedido].[pk_int_Mov_EpharmaMovePedido]
+  [Mov_EpharmaMovePedidoDadosBeneficiario]          AS [beneficiario]          ON [beneficiario].[fk_int_Mov_EpharmaMovePedido] = [pedido].[pk_int_Mov_EpharmaMovePedido]
   FULL JOIN
-  Mov_EpharmaMovePedidoDadosBeneficiarioEndereco  AS [beneficiario_endereco] ON [beneficiario_endereco].[fk_int_Mov_EpharmaMovePedidoDadosBeneficiario]  = [beneficiario].[pk_int_Mov_EpharmaMovePedidoDadosBeneficiario]
+  [Mov_EpharmaMovePedidoDadosBeneficiarioEndereco]  AS [beneficiario_endereco] ON [beneficiario_endereco].[fk_int_Mov_EpharmaMovePedidoDadosBeneficiario]  = [beneficiario].[pk_int_Mov_EpharmaMovePedidoDadosBeneficiario]
   FULL JOIN
-  Mov_EpharmaMovePedidoDadosBeneficiarioTelefones AS [beneficiario_telefone] ON [beneficiario_telefone].[fk_int_Mov_EpharmaMovePedidoDadosBeneficiario] = [beneficiario].[pk_int_Mov_EpharmaMovePedidoDadosBeneficiario]
+  [Mov_EpharmaMovePedidoDadosBeneficiarioTelefones] AS [beneficiario_telefone] ON [beneficiario_telefone].[fk_int_Mov_EpharmaMovePedidoDadosBeneficiario] = [beneficiario].[pk_int_Mov_EpharmaMovePedidoDadosBeneficiario]
   FULL JOIN
-  Mov_EpharmaMovePedidoDadosCliente               AS [cliente]               ON [cliente].[fk_int_Mov_EpharmaMovePedido] = [pedido].[pk_int_Mov_EpharmaMovePedido]
+  [Mov_EpharmaMovePedidoDadosCliente]               AS [cliente]               ON [cliente].[fk_int_Mov_EpharmaMovePedido] = [pedido].[pk_int_Mov_EpharmaMovePedido]
   FULL JOIN
-  Mov_EpharmaMovePedidoDadosClinicos              AS [clinico]               ON [clinico].[fk_int_Mov_EpharmaMovePedido] = [pedido].[pk_int_Mov_EpharmaMovePedido]
+  [Mov_EpharmaMovePedidoDadosClinicos]              AS [clinico]               ON [clinico].[fk_int_Mov_EpharmaMovePedido] = [pedido].[pk_int_Mov_EpharmaMovePedido]
 ORDER BY [dte_DataResposta] DESC
 
 
@@ -97,9 +97,9 @@ ORDER BY [dte_DataResposta] DESC
    Comandos Auxiliares
   ===================================================================================
 
-  APAGAR TODOS OS DADOS REFERENTES AOS PEDIDOS NÃO RESPONDIDOS OU RESPONDIDOS NOS ÚLTIMOS 3 MESES
+  APAGAR TODOS OS DADOS REFERENTES AOS PEDIDOS NÃO RESPONDIDOS OU RESPONDIDOS NO MÊS ATUAL
   Favor selecionar toda a consulta abaixo para apagar todos os pedidos que estão com o
-  campo "dte_DataResposta" como "NULL" ou com data posterior aos últimos 3 meses.
+  campo "dte_DataResposta" como "NULL" ou com a data igual ao mês atual.
   Isso é útil para poder solicitar os pedidos novamente na tela "Pedidos Delivery ePharma Move".
 
 
@@ -107,57 +107,57 @@ ORDER BY [dte_DataResposta] DESC
   DELETE
     [pedido]
   FROM
-    Mov_EpharmaMovePedido AS [pedido]
+    [Mov_EpharmaMovePedido] AS [pedido]
   WHERE
-         (MONTH([pedido].[dte_DataResposta]) >= MONTH(DATEADD(MONTH, - 3, GETDATE()))
-      AND  YEAR([pedido].[dte_DataResposta]) >=  YEAR(DATEADD(MONTH, - 3, GETDATE())))
+         (MONTH([pedido].[dte_DataResposta]) = MONTH(DATEADD(MONTH, - 3, GETDATE()))
+      AND  YEAR([pedido].[dte_DataResposta]) =  YEAR(DATEADD(MONTH, - 3, GETDATE())))
     OR [pedido].[dte_DataResposta] IS NULL
 
   DELETE
     [item]
   FROM
-    Mov_EpharmaMovePedido                           AS [pedido]
+    [Mov_EpharmaMovePedido]                           AS [pedido]
     FULL JOIN
-    Mov_EpharmaMovePedidoItens                      AS [item]                  ON [pedido].[pk_int_Mov_EpharmaMovePedido] = [item].[fk_int_Mov_EpharmaMovePedido]
+    [Mov_EpharmaMovePedidoItens]                      AS [item]                  ON [pedido].[pk_int_Mov_EpharmaMovePedido] = [item].[fk_int_Mov_EpharmaMovePedido]
   WHERE [pedido].[pk_int_Mov_EpharmaMovePedido] IS NULL
 
   DELETE
     [beneficiario]
   FROM
-    Mov_EpharmaMovePedido                           AS [pedido]
+    [Mov_EpharmaMovePedido]                           AS [pedido]
     FULL JOIN
-    Mov_EpharmaMovePedidoDadosBeneficiario          AS [beneficiario]          ON [beneficiario].[fk_int_Mov_EpharmaMovePedido] = [pedido].[pk_int_Mov_EpharmaMovePedido]
+    [Mov_EpharmaMovePedidoDadosBeneficiario]          AS [beneficiario]          ON [beneficiario].[fk_int_Mov_EpharmaMovePedido] = [pedido].[pk_int_Mov_EpharmaMovePedido]
   WHERE [pedido].[pk_int_Mov_EpharmaMovePedido] IS NULL
 
   DELETE
     [beneficiario_endereco]
   FROM
-    Mov_EpharmaMovePedidoDadosBeneficiario          AS [beneficiario]
+    [Mov_EpharmaMovePedidoDadosBeneficiario]          AS [beneficiario]
     FULL JOIN
-    Mov_EpharmaMovePedidoDadosBeneficiarioEndereco  AS [beneficiario_endereco] ON [beneficiario_endereco].[fk_int_Mov_EpharmaMovePedidoDadosBeneficiario]  = [beneficiario].[pk_int_Mov_EpharmaMovePedidoDadosBeneficiario]
+    [Mov_EpharmaMovePedidoDadosBeneficiarioEndereco]  AS [beneficiario_endereco] ON [beneficiario_endereco].[fk_int_Mov_EpharmaMovePedidoDadosBeneficiario]  = [beneficiario].[pk_int_Mov_EpharmaMovePedidoDadosBeneficiario]
   WHERE [beneficiario].[pk_int_Mov_EpharmaMovePedidoDadosBeneficiario] IS NULL
 
   DELETE [beneficiario_telefone]
   FROM
-    Mov_EpharmaMovePedidoDadosBeneficiario          AS [beneficiario]
+    [Mov_EpharmaMovePedidoDadosBeneficiario]          AS [beneficiario]
     FULL JOIN
-    Mov_EpharmaMovePedidoDadosBeneficiarioTelefones AS [beneficiario_telefone] ON [beneficiario_telefone].[fk_int_Mov_EpharmaMovePedidoDadosBeneficiario] = [beneficiario].[pk_int_Mov_EpharmaMovePedidoDadosBeneficiario]
+    [Mov_EpharmaMovePedidoDadosBeneficiarioTelefones] AS [beneficiario_telefone] ON [beneficiario_telefone].[fk_int_Mov_EpharmaMovePedidoDadosBeneficiario] = [beneficiario].[pk_int_Mov_EpharmaMovePedidoDadosBeneficiario]
   WHERE [beneficiario].[pk_int_Mov_EpharmaMovePedidoDadosBeneficiario] IS NULL
 
   DELETE
     [cliente]
   FROM
-    Mov_EpharmaMovePedido                           AS [pedido]
+    [Mov_EpharmaMovePedido]                           AS [pedido]
     FULL JOIN
-    Mov_EpharmaMovePedidoDadosCliente               AS [cliente]               ON [cliente].[fk_int_Mov_EpharmaMovePedido] = [pedido].[pk_int_Mov_EpharmaMovePedido]
+    [Mov_EpharmaMovePedidoDadosCliente]               AS [cliente]               ON [cliente].[fk_int_Mov_EpharmaMovePedido] = [pedido].[pk_int_Mov_EpharmaMovePedido]
   WHERE [pedido].[pk_int_Mov_EpharmaMovePedido] IS NULL
 
   DELETE
     [clinico]
   FROM
-    Mov_EpharmaMovePedido                           AS [pedido]
+    [Mov_EpharmaMovePedido]                           AS [pedido]
     FULL JOIN
-    Mov_EpharmaMovePedidoDadosClinicos              AS [clinico]               ON [clinico].[fk_int_Mov_EpharmaMovePedido] = [pedido].[pk_int_Mov_EpharmaMovePedido]
+    [Mov_EpharmaMovePedidoDadosClinicos]              AS [clinico]               ON [clinico].[fk_int_Mov_EpharmaMovePedido] = [pedido].[pk_int_Mov_EpharmaMovePedido]
   WHERE [pedido].[pk_int_Mov_EpharmaMovePedido] IS NULL
 
 **************************************************************************************/
