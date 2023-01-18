@@ -1,10 +1,12 @@
 /**************************************************************************************
 
-  Press CTRL + SHIFT + M to define parameters and values to be used on this
-  current template.
+  Pressione [CTRL]+[SHIFT]+[M] para definir os valores e parâmetros a serem utilizados
+  nesse template. Após, pressione "[F5]" para usar o Script abaixo.
 
-  DESCRIPTION
-  -------------------------------------------------------------------------------------
+  ===================================================================================
+   Pequena Descrição do Script
+  ===================================================================================
+
   Esse Script tem como objetivo facilitar a busca por títulos (baixados ou não) pelo
   CNAB presentes na telinha de "Contas à Receber" do OuroWeb.
   "Movimento > Financeiro > Contas a Receber"
@@ -16,25 +18,25 @@
 
 SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 DECLARE
-    @IdBanco     AS VARCHAR(MAX) = '<Filtrar por: Nome do Banco (Coluna IdBanco), VARCHAR(MAX), >'
-  , @IdMovimento AS VARCHAR(MAX) = '<Filtrar por: IdMovimento (CR), VARCHAR(MAX), >'
-  , @FoiPago     AS VARCHAR(MAX) = '<Filtrar por: Foi Pago, BIT, >'
+  @IdBanco     AS VARCHAR(MAX) = '<Filtrar por: Nome do Banco (Coluna IdBanco), VARCHAR(MAX), >'
+, @IdMovimento AS VARCHAR(MAX) = '<Filtrar por: IdMovimento (CR),               VARCHAR(MAX), >'
+, @FoiPago     AS VARCHAR(MAX) = '<Filtrar por: Foi Pago,                       BIT,          >'
 
 SELECT
-    [FoiPago]                   AS [Foi Pago]
-  , [bit_TituloBaixadoPeloCNAB] AS [Título Baixado Pelo CNAB]
-  , [IdMovimento]               AS [IdMovimento (CR)]
-  , [IdCadastro]                AS [IdCadastro]
-  , [IdBanco]                   AS [IdBanco]
-  , [NúmeroDocumento]           AS [Número do Documento]
-  , [ValorPagamento]            AS [Valor do Pagamento]
-  , [ValorDocumento]            AS [Valor do Documento]
-  , [DataPagamento]             AS [Data do Pagamento]
-  , [DataÚltimaAlteração]       AS [Data da Última Alteração]
-  , [DataVencimento]            AS [Data do Vencimento]
-  , [DataEntradaCaixa]          AS [Data da Entrada no Caixa]
-  , [DataCadastro]              AS [Data do Cadastro]
-  , [DataEmissão]               AS [Data da Emissão]
+  [FoiPago]                   AS [Foi Pago]
+, [bit_TituloBaixadoPeloCNAB] AS [Título Baixado Pelo CNAB]
+, [IdMovimento]               AS [IdMovimento (CR)]
+, [IdCadastro]                AS [IdCadastro]
+, [IdBanco]                   AS [IdBanco]
+, [NúmeroDocumento]           AS [Número do Documento]
+, [ValorPagamento]            AS [Valor do Pagamento]
+, [ValorDocumento]            AS [Valor do Documento]
+, [DataPagamento]             AS [Data do Pagamento]
+, [DataÚltimaAlteração]       AS [Data da Última Alteração]
+, [DataVencimento]            AS [Data do Vencimento]
+, [DataEntradaCaixa]          AS [Data da Entrada no Caixa]
+, [DataCadastro]              AS [Data do Cadastro]
+, [DataEmissão]               AS [Data da Emissão]
 FROM
   [Mov_Financeiro]
 WHERE

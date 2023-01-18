@@ -1,11 +1,19 @@
 /**************************************************************************************
 
   Pressione "[F5]" para utilizar do Script abaixo.
+  
+  ===================================================================================
+   Script Short Description
+  ===================================================================================
+
+  Confira abaixo também o Script para criar as pastas automaticamente com o caminho
+  que você fornecer para não ter que criar na mão. :)
 
 **************************************************************************************/
 
 -- Menu Superior > Tabelas > Cadastro > Controle de Integrações
 -- Desativar Config que utiliza Interop Store, e Unilog
+
 
 -- VER INTEGRAÇÕES CADASTRADAS
 -- Menu Superior > Integrações > Integração Farma > Configuração Farma
@@ -28,26 +36,25 @@ FROM Tab_FarmaConfig AS a WHERE a.int_TipoIntegracao = 3 ORDER BY a.str_Descrica
 
 /**************************************************************************************
 
--- CONFIGURAR INTEGRAÇÃO POR ARQUIVO
---------------- + --------------- + --------------- + --------------- + ---------------
--- Execute essa consulta para atualizar as pastas da integração da tela de configuração Farma (referente a tabela Tab_FarmaConfig)
--- (Menu Superior > Integrações > Integração Farma > Configuração Farma)
-BEGIN TRAN UPDATE Tab_FarmaConfig
-SET
-  [str_DiretorioBackup]     = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Backup'
-, [str_DiretorioEntrada]    = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Entrada'
-, [str_DiretorioErro]       = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Erro'
-, [str_DiretorioNF]         = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\NFE'
-, [str_DiretorioSaida]      = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Saida'
-, [str_DiretorioTemporario] = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\TMP'
-WHERE pk_int_FarmaConfig = PKIntFarmaConfig
+  -- CONFIGURAR INTEGRAÇÃO POR ARQUIVO
+  --------------- + --------------- + --------------- + --------------- + ---------------
+  -- Execute essa consulta para atualizar as pastas da integração da tela de configuração Farma (referente a tabela Tab_FarmaConfig)
+  -- (Menu Superior > Integrações > Integração Farma > Configuração Farma)
+  BEGIN TRAN UPDATE Tab_FarmaConfig
+  SET
+    [str_DiretorioBackup]     = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Backup'
+  , [str_DiretorioEntrada]    = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Entrada'
+  , [str_DiretorioErro]       = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Erro'
+  , [str_DiretorioNF]         = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\NFE'
+  , [str_DiretorioSaida]      = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Saida'
+  , [str_DiretorioTemporario] = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\TMP'
+  WHERE pk_int_FarmaConfig = PKIntFarmaConfig
 
 
--- CRIAR PASTAS DA INTEGRAÇÃO POR ARQUIVO
---------------- + --------------- + --------------- + --------------- + ---------------
-Pressione "[Windows] + [R]" e cole o seguinte comando para criar as pastas da
-integração:
-CMD /c "MD <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Backup <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Entrada <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Erro <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\NFE <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Saida <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\TMP & START <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>
-
+  -- CRIAR PASTAS DA INTEGRAÇÃO POR ARQUIVO
+  --------------- + --------------- + --------------- + --------------- + ---------------
+  Pressione "[Windows] + [R]" e cole o seguinte comando para criar as pastas da
+  integração:
+  CMD /c "MD <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Backup <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Entrada <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Erro <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\NFE <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Saida <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\TMP & START <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>
 
 **************************************************************************************/

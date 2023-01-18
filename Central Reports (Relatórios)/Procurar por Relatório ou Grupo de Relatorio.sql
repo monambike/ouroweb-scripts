@@ -1,16 +1,20 @@
 /**************************************************************************************
 
   Pressione [CTRL]+[SHIFT]+[M] para definir os valores e parâmetros a serem utilizados
-  nesse template.
+  nesse template. Após, pressione "[F5]" para usar o Script abaixo.
 
-  DESCRIPTION
-  -------------------------------------------------------------------------------------
+  ===================================================================================
+   Pequena Descrição do Script
+  ===================================================================================
+
   Esse Script tem como objetivo facilitar a procura por relatórios pelo seu nomes,
   descrições e estado ativo ou inativo, bem como o grupo em que está.
 
 
-  SELECTED FILTERS
-  -------------------------------------------------------------------------------------
+  ===================================================================================
+   Filtros Selecionados
+  ===================================================================================
+
   Mostrando relatórios que..
   Possuem nome ou descrição:            "<Filtrar por: Nome/Descrição do Relatório, VARCHAR(MAX), >"
   Relatório ativos ou inativos:         "<Filtrar por: Relatórios Ativos, BIT, >"
