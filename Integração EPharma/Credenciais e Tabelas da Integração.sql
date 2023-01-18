@@ -1,13 +1,13 @@
 /**************************************************************************************
 
-  Press "[F5]" to use the Script below.
+  Pressione "[F5]" para usar o Script abaixo.
 
   ===================================================================================
    Pequena Descrição do Script
   ===================================================================================
 
   Esse Script serve como auxílio no desenvolvimento, teste e compreensão da
-  integração EPharma.
+  "Integração EPharma".
 
 
   ===================================================================================
@@ -28,7 +28,7 @@
 
   
   ===================================================================================
-   Scripts Auxiliares
+   Comandos Auxiliares
   ===================================================================================
 
   Configurar a integração da EPharma para o ambiente de homologação:
