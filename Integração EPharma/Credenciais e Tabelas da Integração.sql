@@ -102,22 +102,18 @@ ORDER BY [dte_DataResposta] DESC
   novamente na tela "Pedidos Delivery ePharma Move".
 
   Favor selecionar todas as consultas abaixo para apagar os pedidos que estão com o
-  campo "dte_DataHoraPedido" como "NULL" ou com a data posterior à data informada na
+  campo "dte_DataResposta" como "NULL" ou com a data posterior à data informada na
   variável "@AfterMonthsAgo".
   Informar "0" fará com que apague registros referentes ao mês atual, informar "1"
   fará com que apague do mês passado e do mês atual, e assim por diante.
 
 
   DECLARE @AfterMonthsAgo AS INT = 0
-
-  DELETE
-    [pedido]
-  FROM
-    [Mov_EpharmaMovePedido] AS [pedido]
+  DELETE [pedido] FROM [Mov_EpharmaMovePedido] AS [pedido]
   WHERE 
-    [pedido].[dte_DataHoraPedido] IS NULL
-    OR      (MONTH([pedido].[dte_DataHoraPedido]) = MONTH(DATEADD(MONTH, - @AfterMonthsAgo, GETDATE()))
-        AND  YEAR([pedido].[dte_DataHoraPedido])  =  YEAR(DATEADD(MONTH, - @AfterMonthsAgo, GETDATE())))
+    [pedido].[dte_DataResposta] IS NULL
+    OR      (MONTH([pedido].[dte_DataResposta]) = MONTH(DATEADD(MONTH, - @AfterMonthsAgo, GETDATE()))
+        AND  YEAR([pedido].[dte_DataResposta])  =  YEAR(DATEADD(MONTH, - @AfterMonthsAgo, GETDATE())))
 
   DELETE
     [item]
@@ -126,6 +122,7 @@ ORDER BY [dte_DataResposta] DESC
     FULL JOIN
     [Mov_EpharmaMovePedidoItens]                      AS [item]                  ON [pedido].[pk_int_Mov_EpharmaMovePedido] = [item].[fk_int_Mov_EpharmaMovePedido]
   WHERE [pedido].[pk_int_Mov_EpharmaMovePedido] IS NULL
+
 
   DELETE
     [beneficiario]
@@ -149,6 +146,7 @@ ORDER BY [dte_DataResposta] DESC
     FULL JOIN
     [Mov_EpharmaMovePedidoDadosBeneficiarioTelefones] AS [beneficiario_telefone] ON [beneficiario_telefone].[fk_int_Mov_EpharmaMovePedidoDadosBeneficiario] = [beneficiario].[pk_int_Mov_EpharmaMovePedidoDadosBeneficiario]
   WHERE [beneficiario].[pk_int_Mov_EpharmaMovePedidoDadosBeneficiario] IS NULL
+
 
   DELETE
     [cliente]
