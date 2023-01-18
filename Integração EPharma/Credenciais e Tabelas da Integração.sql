@@ -58,8 +58,9 @@
 
 **************************************************************************************/
 
-
--- Dados do Pedido
+-- ===================================================================================
+--  Retornando Dados do Pedido
+-- ===================================================================================
 SELECT
   [pedido].[pk_int_Mov_EpharmaMovePedido] AS [PK do Pedido]
 , [pedido].[dte_DataResposta]             AS [Data e Hora Resposta]
@@ -97,21 +98,26 @@ ORDER BY [dte_DataResposta] DESC
    Comandos Auxiliares
   ===================================================================================
 
-  APAGAR TODOS OS DADOS REFERENTES AOS PEDIDOS NÃO RESPONDIDOS OU RESPONDIDOS NO MÊS ATUAL
-  Favor selecionar toda a consulta abaixo para apagar todos os pedidos que estão com o
-  campo "dte_DataResposta" como "NULL" ou com a data igual ao mês atual.
-  Isso é útil para poder solicitar os pedidos novamente na tela "Pedidos Delivery ePharma Move".
+  O Script abaixo serve para poder apagar movimentos para que possam ser solicitados
+  novamente na tela "Pedidos Delivery ePharma Move".
+
+  Favor selecionar todas as consultas abaixo para apagar os pedidos que estão com o
+  campo "dte_DataHoraPedido" como "NULL" ou com a data posterior à data informada na
+  variável "@AfterMonthsAgo".
+  Informar "0" fará com que apague registros referentes ao mês atual, informar "1"
+  fará com que apague do mês passado e do mês atual, e assim por diante.
 
 
-  -- Apaga registros do mês do ano atual, na tabela de pedido
+  DECLARE @AfterMonthsAgo AS INT = 0
+
   DELETE
     [pedido]
   FROM
     [Mov_EpharmaMovePedido] AS [pedido]
-  WHERE
-         (MONTH([pedido].[dte_DataResposta]) = MONTH(DATEADD(MONTH, - 3, GETDATE()))
-      AND  YEAR([pedido].[dte_DataResposta]) =  YEAR(DATEADD(MONTH, - 3, GETDATE())))
-    OR [pedido].[dte_DataResposta] IS NULL
+  WHERE 
+    [pedido].[dte_DataHoraPedido] IS NULL
+    OR      (MONTH([pedido].[dte_DataHoraPedido]) = MONTH(DATEADD(MONTH, - @AfterMonthsAgo, GETDATE()))
+        AND  YEAR([pedido].[dte_DataHoraPedido])  =  YEAR(DATEADD(MONTH, - @AfterMonthsAgo, GETDATE())))
 
   DELETE
     [item]
