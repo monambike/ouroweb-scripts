@@ -30,7 +30,7 @@
   -- Atualiza data dos movimentos de orçamento, pedido de venda e venda
   -- e as define para hoje
   BEGIN TRAN UPDATE Mov_Estoque SET DataMovimento = GETDATE() WHERE ClassificaçãoMovimento IN(2,13,16) AND IdMovimento = @IdMovimento
-                              COMMIT                       ROLLBACK
+                              COMMIT             ROLLBACK                              
 
 **************************************************************************************/
 
