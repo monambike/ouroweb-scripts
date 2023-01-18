@@ -1,5 +1,13 @@
 /**************************************************************************************
 
+  DESCRIÇÃO
+  -------------------------------------------------------------------------------------
+  Esse Script tem como objetivo parar a lentidão na abertura do OuroWeb quando causada
+  pela procedure de fechmaento dos itens no mês.
+
+
+  Rodar o Script abaixo caso o seu OuroWeb estiver lento ao iniciar por conta do mês
+  atual não estar fechado na tabela:
 
   DECLARE @CurrentMonth AS INT = CAST(MONTH(GETDATE()) AS INT), @CurrentYear AS INT = CAST(YEAR(GETDATE()) AS INT)
   DECLARE @MessagePrefix AS VARCHAR(10)
@@ -15,14 +23,20 @@
   EXEC sp_lst_FechamentoMes @CurrentMonth, @CurrentYear
   GO
 
-  UPDATE [FechamentoMes] SET [bit_MesFechado] = 1 WHERE int_Mes = CAST(MONTH(GETDATE()) AS INT) AND int_Ano = CAST(YEAR(GETDATE()) AS INT)
+  UPDATE [FechamentoMes]
+  SET
+    [bit_MesFechado]         = 1
+  , [dte_DataHoraFechamento] = GETDATE()
+  , [fk_int_IdUsuario]       = 66
+  WHERE int_Mes = CAST(MONTH(GETDATE()) AS INT) AND int_Ano = CAST(YEAR(GETDATE()) AS INT)
 
 **************************************************************************************/
-  EXEC sp_lst_FechamentoMes 12, 2022
-  GO
 SELECT
-    [a].[pk_int_FechamentoMes]
-  , [a].[bit_MesFechado],
-  *
+  [a].[pk_int_FechamentoMes]
+, [a].[bit_MesFechado]
+, *
 FROM
-  FechamentoMes a WITH(NOLOCK)
+  [FechamentoMes] a WITH(NOLOCK)
+ORDER BY
+  [dte_DataHoraFechamento] DESC
+

@@ -8,22 +8,23 @@
 **************************************************************************************/
 
 SELECT
-  [a].[IdEmpresa]            AS [IdEmpresa],
-  [a].[Empresa]              AS [Empresa],
-  [b].[IdLocal]              AS [IdLocal],
-  [b].[DescriçãoLocal]       AS [DescriçãoLocal],
-  [a].[IdLocalEstoquePadrão] AS [IdLocalEstoquePadrão],
-  [a].[Estado]               AS [Estado],
-  [c].[Cidade]               AS [Cidade],
-  [a].[País]                 AS [País],
-  [a].[Endereço]             AS [Endereço],
-  [a].[Bairro]               AS [Bairro],
-  [a].[str_complemento]      AS [Complemento]
+  [Empresa].[IdEmpresa]            AS [IdEmpresa]
+, [Empresa].[Empresa]              AS [Empresa]
+, [LocalEstoque].[IdLocal]         AS [IdLocal]
+, [LocalEstoque].[DescriçãoLocal]  AS [DescriçãoLocal]
+, [Empresa].[IdLocalEstoquePadrão] AS [IdLocalEstoquePadrão]
+, [Empresa].[Estado]               AS [Estado]
+, [Cidade].[Cidade]                AS [Cidade]
+, [Empresa].[País]                 AS [País]
+, [Empresa].[Endereço]             AS [Endereço]
+, [Empresa].[Bairro]               AS [Bairro]
+, [Empresa].[str_complemento]      AS [Complemento]
 FROM
-  [Tab_Empresa] AS [a]
+  [Tab_Empresa]       AS [Empresa]
   INNER JOIN
-  [Tab_LocaisEstoque] AS [b] ON [a].IdEmpresa = [b].IDEmpresa
+  [Tab_LocaisEstoque] AS [LocalEstoque] ON [LocalEstoque].IDEmpresa = [Empresa].IdEmpresa
   INNER JOIN
-  [Tab_Cidades] AS [c] ON [a].[IdCidade] = [c].[IdCidade]
+  [Tab_Cidades]       AS [Cidade]       ON [Cidade].[IdCidade] = [Empresa].[IdCidade]
 ORDER BY
-  [a].[IdEmpresa], [b].[IdLocal]
+  [Empresa].[IdEmpresa]
+, [LocalEstoque].[IdLocal]

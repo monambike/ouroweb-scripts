@@ -1,25 +1,34 @@
-************** Configuraçãoes locais ***************
-url Bionexo: http://sandbox.bionexo.com.br/ws2/BionexoBean?wsdl
-Url Malha:http://172.31.1.11:8091/ws/WSMALHA.apw
+/**************************************************************************************
+
+Configurações do CCE:
+SELECT * FROM Tab_CceConfig 
+
+
+INTEGRADORES
+--------------- + --------------- + --------------- + --------------- + ---------------
+
+Bionexo
+-------------------------------------------------------------------------------------
+URL do Site: https://bionexo.com/
+Link para o Site de Teste: https://sandbox-web.bionexo.com.br/index3.jsp
+Usuário: comprador_teste
+Senha: 2wsx@dr5
+
+URL de Teste: http://sandbox.bionexo.com.br/ws2/BionexoBean?wsdl
+Url Malha: http://172.31.1.11:8091/ws/WSMALHA.apw
 cotacoesouro@grupoelfa.com.br
 smtp.office365.com
 Elfa@2020
 
-usuário e senha do Bionexo
-ws_crismed
-Crismed*26759
+Apoio
+-------------------------------------------------------------------------------------
+URL do Site: http://homologacao.apoiocotacoes.com.br/
+Link para o Site de Teste: http://homologacao.apoiocotacoes.com.br/app/fornecedores/WSFornecedores?wsdl 
+Usuário: ELFASC 
+Senha: qetuo
 
-Site CCE
-https://sandbox.bionexo.com.br/index3.jsp
-Usuário: comprador_teste
-Senha: Bionexo2020
+Síntese
+-------------------------------------------------------------------------------------
+URL do Site: https://www.plataformasintese.com/saude/
 
-user: comprador_testecce
-senha: testecce3
-
-Ambiente de testes Apoio 
-URL Apoio: http://homologacao.apoiocotacoes.com.br/app/fornecedores/WSFornecedores?wsdl 
-usuário = ELFASC 
-senha = qetuo
-
-SELECT * FROM Tab_CceConfig 
+**************************************************************************************/

@@ -1,19 +1,19 @@
 DECLARE
-    @IdUsuario   AS INT      = 1226 -- (Meu usuário)
-  , @IdPendencia AS INT      = ''
-  , @Data        AS DATETIME = ''   -- Formato da Data [yyyy-MM-dd]
+  @IdUsuario   AS INT      = 1226 -- (Meu usuário)
+, @IdPendencia AS INT      = ''
+, @Data        AS DATETIME = ''   -- Formato da Data [yyyy-MM-dd]
 
 SELECT
-    [pendenciahora].[IdPendenciaHoras] AS [IdPendenciaHoras]
-  , [node].[Descricao]                 AS [Pendência na Pasta]
-  , [usuario].[PrimeiroNome]           AS [PrimeiroNome]
-  , [usuario].[Email]                  AS [Email]
-  , [pendenciahora].[IdPendencia]      AS [IdPendencia]
-  , [pendencia].[Assunto]              AS [Assunto]
-  , [tipohora].[DescricaoTipoHora]     AS [DescricaoTipoHora]
-  , [pendenciahora].[Data]             AS [Data]
-  , [pendenciahora].[HoraInicio]       AS [HoraInicio]
-  , [pendenciahora].[HoraFim]          AS [HoraFim]
+  [pendenciahora].[IdPendenciaHoras] AS [IdPendenciaHoras]
+, [node].[Descricao]                 AS [Pendência na Pasta]
+, [usuario].[PrimeiroNome]           AS [PrimeiroNome]
+, [usuario].[Email]                  AS [Email]
+, [pendenciahora].[IdPendencia]      AS [IdPendencia]
+, [pendencia].[Assunto]              AS [Assunto]
+, [tipohora].[DescricaoTipoHora]     AS [DescricaoTipoHora]
+, [pendenciahora].[Data]             AS [Data]
+, [pendenciahora].[HoraInicio]       AS [HoraInicio]
+, [pendenciahora].[HoraFim]          AS [HoraFim]
 FROM
   [Pendencias_Horas] AS [pendenciahora] WITH(NOLOCK)
   INNER JOIN
