@@ -1,15 +1,16 @@
 /**************************************************************************************
 
-  Press CTRL + SHIFT + M to define parameters and values to be used on this
-  current template.
+  Pressione "[CTRL] + [SHIFT] + [M]" para definir os valores e parâmetros a serem
+  utilizados nesse template. Após, pressione "[F5]" para usar o Script abaixo.
 
-  DESCRIPTION
-  -------------------------------------------------------------------------------------
+  ===================================================================================
+   Pequena Descrição do Script
+  ===================================================================================
+
   Esse Script tem como objetivo facilitar a procura por permissões.
 
-
   Se você quiser habilitar a permissão você pode utilizar o seguinte comando:
-  UPDATE tab_ConfigCampoAtributo SET str_ValorAtributo = 1 WHERE fk_int_ConfigCampo = 494 
+  UPDATE tab_ConfigCampoAtributo SET str_ValorAtributo = 1 WHERE fk_int_ConfigCampo = @PrimaryKeyDaPermissao 
 
 **************************************************************************************/
 

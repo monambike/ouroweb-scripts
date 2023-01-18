@@ -1,7 +1,7 @@
-/**********************************************************************
+/**************************************************************************************
 
-  Pressione [CTRL]+[SHIFT]+[M] para definir os valores e parâmetros a serem utilizados
-  nesse template. Após, pressione "[F5]" para usar o Script abaixo.
+  Pressione "[CTRL] + [SHIFT] + [M]" para definir os valores e parâmetros a serem
+  utilizados nesse template. Após, pressione "[F5]" para usar o Script abaixo.
 
   ===================================================================================
    Pequena Descrição do Script
@@ -11,7 +11,7 @@
 
 
   ===================================================================================
-   Auxiliary Commands
+   Comandos Auxiliares
   ===================================================================================
 
   Tabelas relacionadas à criação da etiqueta:
@@ -19,7 +19,7 @@
   SELECT * FROM Tab_EtiquetaMod 
   SELECT * FROM tab_ConfigMod
 
-**********************************************************************/
+**************************************************************************************/
 
 BEGIN TRAN
   IF EXISTS (SELECT * FROM Tab_Etiqueta WHERE str_nm_Etiqueta = '<Nome da Etiqueta, VARCHAR(MAX), >')

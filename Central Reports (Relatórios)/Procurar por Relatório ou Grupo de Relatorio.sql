@@ -1,7 +1,7 @@
 /**************************************************************************************
 
-  Pressione [CTRL]+[SHIFT]+[M] para definir os valores e parâmetros a serem utilizados
-  nesse template. Após, pressione "[F5]" para usar o Script abaixo.
+  Pressione "[CTRL] + [SHIFT] + [M]" para definir os valores e parâmetros a serem
+  utilizados nesse template. Após, pressione "[F5]" para usar o Script abaixo.
 
   ===================================================================================
    Pequena Descrição do Script

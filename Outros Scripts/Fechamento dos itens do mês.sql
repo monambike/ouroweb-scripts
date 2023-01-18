@@ -1,10 +1,18 @@
 /**************************************************************************************
 
-  DESCRIÇÃO
-  -------------------------------------------------------------------------------------
+  Pressione "[F5]" para utilizar do Script abaixo.
+
+  ===================================================================================
+   Pequena Descrição do Script
+  ===================================================================================
+
   Esse Script tem como objetivo parar a lentidão na abertura do OuroWeb quando causada
   pela procedure de fechmaento dos itens no mês.
 
+
+  ===================================================================================
+   Comandos Auxiliares
+  ===================================================================================
 
   Rodar o Script abaixo caso o seu OuroWeb estiver lento ao iniciar por conta do mês
   atual não estar fechado na tabela:
@@ -31,6 +39,7 @@
   WHERE int_Mes = CAST(MONTH(GETDATE()) AS INT) AND int_Ano = CAST(YEAR(GETDATE()) AS INT)
 
 **************************************************************************************/
+
 SELECT
   [a].[pk_int_FechamentoMes]
 , [a].[bit_MesFechado]

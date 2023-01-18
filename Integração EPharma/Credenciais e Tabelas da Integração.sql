@@ -3,7 +3,7 @@
   Press "[F5]" to use the Script below.
 
   ===================================================================================
-   Script Short Description
+   Pequena Descrição do Script
   ===================================================================================
 
   Esse Script serve como auxílio no desenvolvimento, teste e compreensão da
@@ -20,6 +20,23 @@
   Senha: 123456
   Servico: WsDelivery
   Empresa a Consultar: 11719795000370
+
+  Site de Produção http://webservice.epharma.com.br/WsConcentrador.asmx?WSDL
+  Usuário: 11719795000370
+  Senha: JgtHbfeL
+  Empresa a Consultar: 11719795000370
+
+  
+  ===================================================================================
+   Scripts Auxiliares
+  ===================================================================================
+
+  Configurar a integração da EPharma para o ambiente de homologação:
+  UPDATE Tab_EpharmaMoveConfig
+  SET
+    [str_UrlServico] = 'http://wshomolo.pbms.com.br:8010/WsConcentrador.asmx'
+  , [str_Usuario]    = 11719795000370
+  , [str_Senha]      = 123456
 
 **************************************************************************************/
 

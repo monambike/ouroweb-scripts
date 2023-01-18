@@ -1,11 +1,14 @@
 /**************************************************************************************
 
-  Press CTRL + SHIFT + M to define parameters and values to be used on this
-  current template.
+  Pressione "[CTRL] + [SHIFT] + [M]" para definir os valores e parâmetros a serem
+  utilizados nesse template. Após, pressione "[F5]" para usar o Script abaixo.
+  
+  ===================================================================================
+   Pequena Descrição do Script
+  ===================================================================================
 
-  DESCRIPTION
-  -------------------------------------------------------------------------------------
-  Esse Script tem como objetivo facilitar a procura por permissões e grupo de permissões.
+  Esse Script tem como objetivo facilitar a procura por permissões e grupo de
+  permissões.
 
 **************************************************************************************/
 
