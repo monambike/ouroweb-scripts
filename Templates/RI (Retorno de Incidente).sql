@@ -12,8 +12,8 @@
 SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 SET NOCOUNT ON
 DECLARE
-    @PendenciaId             AS INT = 68661
-  , @MostrarApenasCorrigidas AS BIT = 1
+    @PendenciaId                      AS INT = '<ID da Pendencia, INT, >'
+  , @MostrarApenasErrosNaoCorrigidos  AS BIT = '<Mostrar Apenas Erros Corrigidos, BIT, >'
 
 IF(OBJECT_ID('tempdb..#Erros') IS NOT NULL)
   DROP TABLE [dbo].[#Erros]
@@ -28,7 +28,7 @@ FROM
   [CasoTeste_Erros] AS [Erro] ON [CasoTeste].[pk_int_CasoTeste] = [Erro].[fk_int_CasoTeste]
 WHERE
       ([CasoTeste].[int_pendencia] = @PendenciaId)
-  AND (@MostrarApenasCorrigidas = 0 OR [Erro].[bit_Corrigido] = 1)
+  AND ((@MostrarApenasErrosNaoCorrigidos = '' OR  @MostrarApenasErrosNaoCorrigidos = 0) OR [Erro].[bit_Corrigido] = 0)
 
 -- =============================================
 -- Retornando os retornos de incidente (RIs) e
@@ -53,24 +53,27 @@ CLOSE Erro
 -- Finalizado o cursor
 DEALLOCATE Erro
 
--- =============================================
--- Juntando as informações à respeito da pendência
--- com as informações dos erros acima.
--- =============================================
-DECLARE @Result AS VARCHAR(MAX) = ''
-SELECT
-  @Result = [ProjetoTeste].[str_Descricao]
-            + CHAR(13) + CHAR(10) + 'Pendência ' + CAST([Pendencia].[IdPendencia] AS VARCHAR) + ' - ' + [Pendencia].[Assunto]
-            + CHAR(13) + CHAR(10) + @Erros
-FROM
-  [Pendencias] AS [Pendencia]
-  INNER JOIN
-  [ProjetoTeste] AS [ProjetoTeste] ON [Pendencia].[fk_int_ProjetoTeste] = [ProjetoTeste].[pk_int_ProjetoTeste]
-WHERE
-  [Pendencia].[IdPendencia] = @PendenciaId
-
 IF NOT EXISTS(SELECT * FROM #Erros)
   PRINT 'Essa pendência não possui nenhum erro.'
-IF EXISTS(SELECT * FROM #Erros) AND @MostrarApenasCorrigidas = 1
-  PRINT 'Essa pendência possui alguns erros mas nenhum a ser corrigido. Para visualizar os erros não corrigidos defina o parâmetro ''@MostrarApenasCorrigidas'' como ''0''.'
-ELSE PRINT @Result
+ELSE IF EXISTS(SELECT * FROM #Erros) AND @MostrarApenasErrosNaoCorrigidos = 1
+  PRINT 'Essa pendência possui alguns erros mas nenhum a ser corrigido. Para visualizar os erros não corrigidos defina o parâmetro ''@MostrarApenasErrosNaoCorrigidos'' como ''0''.'
+ELSE
+BEGIN
+  -- =============================================
+  -- Juntando as informações à respeito da pendência
+  -- com as informações dos erros acima.
+  -- =============================================
+  DECLARE @Result AS VARCHAR(MAX) = ''
+  SELECT
+    @Result = [ProjetoTeste].[str_Descricao]
+              + CHAR(13) + CHAR(10) + 'Pendência ' + CAST([Pendencia].[IdPendencia] AS VARCHAR) + ' - ' + [Pendencia].[Assunto]
+              + CHAR(13) + CHAR(10) + @Erros
+  FROM
+    [Pendencias] AS [Pendencia]
+    INNER JOIN
+    [ProjetoTeste] AS [ProjetoTeste] ON [Pendencia].[fk_int_ProjetoTeste] = [ProjetoTeste].[pk_int_ProjetoTeste]
+  WHERE
+    [Pendencia].[IdPendencia] = @PendenciaId
+
+  PRINT @Result
+END

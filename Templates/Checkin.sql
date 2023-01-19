@@ -27,7 +27,7 @@ OPEN Requisito
   DECLARE @Requisitos AS VARCHAR(MAX) = ''
   WHILE @@FETCH_STATUS = 0
   BEGIN
-    SET @Requisitos += @RequisitoID + ' - ' + @RequisitoAssunto + CHAR(13) + CHAR(10)
+    SET @Requisitos += @RequisitoID + ' - ' + REPLACE(LTRIM(RTRIM(@RequisitoAssunto)), CHAR(9), '') + CHAR(13) + CHAR(10)
     FETCH NEXT FROM Requisito INTO @RequisitoID, @RequisitoAssunto
   END
 -- Fechando Cursor para leitura
