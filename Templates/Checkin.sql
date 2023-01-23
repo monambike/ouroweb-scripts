@@ -1,10 +1,12 @@
 /**************************************************************************************
 
-  Press CTRL + SHIFT + M to define parameters and values to be used on this
-  current template.
+  Pressione "[CTRL] + [SHIFT] + [M]" para definir os valores e parâmetros a serem
+  utilizados nesse template. Após, pressione "[F5]" para usar o Script abaixo.
 
-  DESCRIPTION
-  -------------------------------------------------------------------------------------
+  ===================================================================================
+   Pequena Descrição do Script
+  ===================================================================================
+
   Esse Script tem como objetivo facilitar a criação do template para Checkin.
 
 **************************************************************************************/
@@ -30,7 +32,7 @@ OPEN Requisito
     SET @Requisitos += @RequisitoID + ' - ' + REPLACE(LTRIM(RTRIM(@RequisitoAssunto)), CHAR(9), '') + CHAR(13) + CHAR(10)
     FETCH NEXT FROM Requisito INTO @RequisitoID, @RequisitoAssunto
   END
--- Fechando Cursor para leitura
+-- Fechando o cursor para leitura
 CLOSE Requisito
 -- Finalizado o cursor
 DEALLOCATE Requisito

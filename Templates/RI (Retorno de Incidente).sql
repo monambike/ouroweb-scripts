@@ -1,10 +1,12 @@
 /**************************************************************************************
 
-  Press CTRL + SHIFT + M to define parameters and values to be used on this
-  current template.
+  Pressione "[CTRL] + [SHIFT] + [M]" para definir os valores e parâmetros a serem
+  utilizados nesse template. Após, pressione "[F5]" para usar o Script abaixo.
 
-  DESCRIPTION
-  -------------------------------------------------------------------------------------
+  ===================================================================================
+   Pequena Descrição do Script
+  ===================================================================================
+
   Esse Script tem como objetivo facilitar a criação do template para Retorno de RI.
 
 **************************************************************************************/
@@ -48,7 +50,7 @@ OPEN Erro
     SET @Erros += @ErroID + ' - ' + @ErroAssunto + CHAR(13) + CHAR(10)
     FETCH NEXT FROM Erro INTO @ErroID, @ErroAssunto
   END
--- Fechando Cursor para leitura
+-- Fechando o cursor para leitura
 CLOSE Erro
 -- Finalizado o cursor
 DEALLOCATE Erro

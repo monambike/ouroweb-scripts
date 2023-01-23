@@ -1,3 +1,17 @@
+/**************************************************************************************
+
+  Pressione "[CTRL] + [SHIFT] + [M]" para definir os valores e parâmetros a serem
+  utilizados nesse template. Após, pressione "[F5]" para usar o Script abaixo.
+
+  ===================================================================================
+   Pequena Descrição do Script
+  ===================================================================================
+
+  Esse Script tem como objetivo facilitar o ajuste de pendências e horários de
+  apontamento no Follow.
+
+**************************************************************************************/
+
 DECLARE
   @IdUsuario   AS INT      = 1226 -- (Meu usuário)
 , @IdPendencia AS INT      = ''

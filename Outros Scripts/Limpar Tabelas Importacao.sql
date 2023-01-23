@@ -1,3 +1,15 @@
+/**************************************************************************************
+
+  Pressione "[F5]" para utilizar do Script abaixo.
+
+  ===================================================================================
+   Pequena Descrição do Script
+  ===================================================================================
+
+  Esse Script tem como objetivo facilitar a limpeza das tabelas de importação.
+
+**************************************************************************************/
+
 SELECT * FROM Mov_Estoque_Importacao_Armazenagem
 
 --DELETE FROM Mov_Estoque_Importacao_Armazenagem
