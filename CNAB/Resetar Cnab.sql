@@ -62,8 +62,8 @@ WHERE
     , [DataEntradaCaixa]          = NULL
     , [bit_TituloBaixadoPeloCNAB] = 0
   WHERE
-    [FoiPago] = 1                  -- Olhando somente movimentos que não foram pagos para ler
+    [IdMovimento] IN (39111,39112) -- Colocar o "CR" aqui
+    AND [FoiPago] = 1              -- Olhando somente movimentos que não foram pagos para ler
                                    -- novamente o arquivo retorno
-    AND [IdMovimento] IN (39111,39112) -- Colocar o "CR" aqui
 
 **************************************************************************************/
