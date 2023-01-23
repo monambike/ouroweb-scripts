@@ -72,7 +72,7 @@ BEGIN
               + CHAR(13) + CHAR(10) + @Erros
   FROM
     [Pendencias] AS [Pendencia]
-    INNER JOIN
+    LEFT JOIN
     [ProjetoTeste] AS [ProjetoTeste] ON [Pendencia].[fk_int_ProjetoTeste] = [ProjetoTeste].[pk_int_ProjetoTeste]
   WHERE
     [Pendencia].[IdPendencia] = @PendenciaId

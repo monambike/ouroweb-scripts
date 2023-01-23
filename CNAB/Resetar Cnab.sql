@@ -44,9 +44,9 @@ WHERE
         OR IdBanco                   LIKE '%' + @IdBanco + '%')
   AND (@IdMovimento  IN ('', CHAR(60) + 'Filtrar por: IdMovimento (CR), VARCHAR(MAX), ' + CHAR(62))
         OR CAST(IdMovimento AS VARCHAR) =    @IdMovimento)
-  --AND (IdMovimento IN (0))
   AND (@FoiPago IN ('', CHAR(60) + 'Filtrar por: Foi Pago, BIT, ' + CHAR(62))
         OR CAST(FoiPago     AS VARCHAR) =    @FoiPago)
+  --(IdMovimento IN (0))
 
 /**************************************************************************************
   
@@ -57,10 +57,10 @@ WHERE
   UPDATE
     [Mov_Financeiro]
   SET
-      [FoiPago]                   = 0
-    , [DataPagamento]             = NULL
-    , [DataEntradaCaixa]          = NULL
-    , [bit_TituloBaixadoPeloCNAB] = 0
+    [FoiPago]                   = 0
+  , [DataPagamento]             = NULL
+  , [DataEntradaCaixa]          = NULL
+  , [bit_TituloBaixadoPeloCNAB] = 0
   WHERE
     [IdMovimento] IN (39111,39112) -- Colocar o "CR" aqui
     AND [FoiPago] = 1              -- Olhando somente movimentos que não foram pagos para ler
