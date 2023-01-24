@@ -10,7 +10,7 @@
   Esse Script tem como objetivo facilitar a procura por permissões.
 
   Se você quiser habilitar a permissão você pode utilizar o seguinte comando:
-  UPDATE tab_ConfigCampoAtributo SET str_ValorAtributo = 1 WHERE fk_int_ConfigCampo = @PrimaryKeyDaPermissao 
+  UPDATE tab_ConfigCampoAtributo SET str_ValorAtributo = 1 WHERE fk_int_ConfigCampo = @ConfigCampoID 
 
 **************************************************************************************/
 
