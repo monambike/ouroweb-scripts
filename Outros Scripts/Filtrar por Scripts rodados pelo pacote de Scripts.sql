@@ -19,16 +19,12 @@
   Com data anterior a:                               "<Filtrar por: Data Inicial, VARCHAR, >"
   Scripts bem sucedidos:                             "<Mostrar Apenas: Apenas Scripts Sucedidos, BIT, >"
 
-  Ordenar por..
-  Data de Início (0 - Ascendente / 1 - Descendente): "<Ordenar por: Ascendente ou Descendente, BIT, >"
-
 **************************************************************************************/
 
 DECLARE
   @ScriptInicioDataInicial AS DATETIME = '<Filtrar por: Data Inicial, VARCHAR, >'
 , @ScriptInicioDataFinal   AS DATETIME = '<Filtrar por: Data Inicial, VARCHAR, >'
 , @ScriptSucesso           AS BIT      = '<Mostrar Apenas: Apenas Scripts Sucedidos, BIT, >'
-, @AscDesc                 AS BIT      = '<Ordenar por: Ascendente ou Descendente, BIT, >'
 
 
 SELECT
@@ -44,5 +40,4 @@ WHERE
   (@ScriptInicioDataInicial = '' OR [str_DataInicio] >= @ScriptInicioDataInicial)
   AND (@ScriptInicioDataFinal = '' OR [str_DataInicio] <= @ScriptInicioDataFinal)
 ORDER BY
-  (CASE WHEN @AscDesc = 0 THEN [str_DataInicio] END) ASC
-, (CASE WHEN @AscDesc = 1 THEN [str_DataInicio] END) DESC 
+  [str_DataInicio] DESC 

@@ -12,11 +12,11 @@
 **************************************************************************************/
 
 DECLARE
-    @SearchForPermissionID          AS INT = <Filtrar por: ID da Permissão, INT, >
+    @SearchForPermissionID          AS INT = '<Filtrar por: ID da Permissão, INT, >'
   , @SearchForPermissionName        AS VARCHAR(MAX) = '<Filtrar por: Nome da Permissão, VARCHAR, >'
   , @SearchForPermissionDescription AS VARCHAR(MAX) = '<Filtrar por: Descrição da Permissão, VARCHAR, >'
     
-  , @SearchForPermissionType AS INT = <Filtrar por: Tipo da Permissão, INT, >
+  , @SearchForPermissionType AS INT = '<Filtrar por: Tipo da Permissão, INT, >'
 
 
 SELECT
