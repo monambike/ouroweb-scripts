@@ -6,10 +6,13 @@
    Pequena Descrição do Script
   ===================================================================================
 
-  O Script à seguir visa auxiliar na carga inciial para a OuroBase.
+  O Script à seguir visa auxiliar a realizar cargas de alguns dados da OuroBase para
+  a OuroReports.
+  Informe o nome da base e rode o Script para realizar as cargas.
 
 **************************************************************************************/
 
+DECLARE @DatabaseName AS SYSNAME = '<Nome da Base, SYSNAME, >'
 EXEC sp_mng_CargaInicial_Estoque  @DatabaseName
 EXEC sp_mng_CargaInicial_Cadastro @DatabaseName
 EXEC sp_mng_CargaInicial_Pedido   @DatabaseName, 13, 300

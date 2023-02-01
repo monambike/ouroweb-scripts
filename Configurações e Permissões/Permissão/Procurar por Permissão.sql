@@ -12,22 +12,22 @@
 **************************************************************************************/
 
 DECLARE
-    @SearchForPermissionID          AS INT = '<Filtrar por: ID da Permissão, INT, >'
-  , @SearchForPermissionName        AS VARCHAR(MAX) = '<Filtrar por: Nome da Permissão, VARCHAR, >'
-  , @SearchForPermissionDescription AS VARCHAR(MAX) = '<Filtrar por: Descrição da Permissão, VARCHAR, >'
+  @SearchForPermissionID          AS INT          = '<Filtrar por: ID da Permissão, INT, >'
+, @SearchForPermissionName        AS VARCHAR(MAX) = '<Filtrar por: Nome da Permissão, VARCHAR, >'
+, @SearchForPermissionDescription AS VARCHAR(MAX) = '<Filtrar por: Descrição da Permissão, VARCHAR, >'
     
-  , @SearchForPermissionType AS INT = '<Filtrar por: Tipo da Permissão, INT, >'
+, @SearchForPermissionType AS INT = '<Filtrar por: Tipo da Permissão, INT, >'
 
 
 SELECT
-    IdRotina        AS [ID]
-  , NomeRotina      AS [Nome da Permissão]
-  , DescricaoRotina AS [Descrição da Permissão]
-  , TipoRotina      AS [Tipo de Permissão]
+  [IdRotina]        AS "ID"
+, [NomeRotina]      AS "Nome"
+, [DescricaoRotina] AS "Descrição"
+, [TipoRotina]      AS "Tipo"
 FROM
-  Rotinas AS a
+  [Rotinas] AS [Permissao]
 WHERE
-  (@SearchForPermissionID              = '' OR a.IdRotina        = @SearchForPermissionID)
-  AND (@SearchForPermissionName        = '' OR a.NomeRotina      LIKE ('%' + @SearchForPermissionName + '%'))
-  AND (@SearchForPermissionDescription = '' OR a.DescricaoRotina LIKE ('%' + @SearchForPermissionDescription + '%'))
-  AND (@SearchForPermissionType        = '' OR a.TipoRotina      = @SearchForPermissionType)
+      (@SearchForPermissionID          = '' OR [Permissao].[IdRotina]        = @SearchForPermissionID)
+  AND (@SearchForPermissionName        = '' OR [Permissao].[NomeRotina]      LIKE ('%' + @SearchForPermissionName        + '%'))
+  AND (@SearchForPermissionDescription = '' OR [Permissao].[DescricaoRotina] LIKE ('%' + @SearchForPermissionDescription + '%'))
+  AND (@SearchForPermissionType        = '' OR [Permissao].[TipoRotina]      = @SearchForPermissionType)

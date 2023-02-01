@@ -1,48 +1,52 @@
 /******************************************************************************
-		Descrição: AjustaNomeCampoFramework
+
+  Nome da Função: AjustaNomeCampoFramework
+  Sugestão de Nome do Script: XXX - Criar_Funcao_AjustaNomeCampoFramework
+
+  Descrição: Script para auxiliar na execução das procedures referentes ao
+  mapeamento de objetos do SQL Server para o "OuroNet".
+
 *******************************************************************************/
 
-if exists (select * from sysobjects where type = 'FN' and name = 'AjustaNomeCampoFramework')
-	begin
-		print 'Removendo Function AjustaNomeCampoFramework'
-		drop function AjustaNomeCampoFramework
-	end
-go
+IF EXISTS (SELECT * FROM SYSOBJECTS WHERE TYPE IN ('FN', 'TF') AND NAME = 'AjustaNomeCampoFramework')
+  BEGIN
+    PRINT 'Removendo função "AjustaNomeCampoFramework"...'
+    DROP FUNCTION AjustaNomeCampoFramework
+  END
+GO
 
-print 'Criando Function AjustaNomeCampoFramework'
-go
+PRINT 'Criando função "AjustaNomeCampoFramework"...'
+GO
 
-create function AjustaNomeCampoFramework
-																			(
-																				@campo varchar(8000),
-																				@bit_Field bit = 0
-																			) returns varchar(8000)
-as
-begin
-	declare @retornar varchar(8000)
-	
-	set @retornar = dbo.RemoveAcentos(@campo)
+CREATE FUNCTION AjustaNomeCampoFramework
+(
+  @Field      VARCHAR(MAX),
+  @FieldIsBit bit = 0
+) RETURNS VARCHAR(MAX)
+AS
+BEGIN
+  DECLARE @Result VARCHAR(MAX)
+  
+  SET @Result = dbo.RemoveAcentos(@Field)
 
-	set @retornar = (case substring(@retornar, 1, 4)
-										 when 'bit_' then replace(@retornar,'bit_', '')
-										 when 'cur_' then replace(@retornar,'cur_', '')
-										 when 'dbl_' then replace(@retornar,'dbl_', '')
-										 when 'dte_' then replace(@retornar,'dte_', '')
-										 when 'int_' then replace(@retornar,'int_', '')
-										 when 'str_' then replace(@retornar,'str_', '')
-										 when 'img_' then replace(@retornar,'img_', '')
-										 else @retornar
-									 end)
-	
-	set @retornar = replace(@retornar,'_', '')
-	set @retornar = replace(@retornar,'fkint', 'FkInt')
-	set @retornar = replace(@retornar,'pkint', 'PkInt')
-	
-	if (@bit_Field = 1)
-		begin
-			set @retornar = '_' + lower(left(@retornar, 1)) + substring(@retornar, 2, len(@retornar))
-		end
+  SET @Result = (CASE SUBSTRING(@Result, 1, 4)
+                   WHEN 'bit_' THEN REPLACE(@Result,'bit_', '')
+                   WHEN 'cur_' THEN REPLACE(@Result,'cur_', '')
+                   WHEN 'dbl_' THEN REPLACE(@Result,'dbl_', '')
+                   WHEN 'dte_' THEN REPLACE(@Result,'dte_', '')
+                   WHEN 'int_' THEN REPLACE(@Result,'int_', '')
+                   WHEN 'str_' THEN REPLACE(@Result,'str_', '')
+                   WHEN 'img_' THEN REPLACE(@Result,'img_', '')
+                   ELSE @Result
+                 END)
+  
+  SET @Result = REPLACE(@Result,'_', '')
+  SET @Result = REPLACE(@Result,'fkint', 'FkInt')
+  SET @Result = REPLACE(@Result,'pkint', 'PkInt')
+  
+  IF (@FieldIsBit = 1)
+    SET @Result = '_' + LOWER(LEFT(@Result, 1)) + SUBSTRING(@Result, 2, LEN(@Result))
 
-	return @retornar
-end
-go
+  return @Result
+END
+GO

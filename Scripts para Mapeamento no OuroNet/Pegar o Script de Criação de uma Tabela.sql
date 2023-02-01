@@ -1,25 +1,33 @@
+/******************************************************************************
 
-/************************************************
-	Script para obter o script de criação da Tabela
-	https://stackoverflow.com/questions/706664/generate-sql-create-scripts-for-existing-tables-with-query
-*************************************************/
---Select * From ElfaVs982_DVP.dbo.Tmp_MovimentoPesquisaItens
+  Pressione "[CTRL] + [SHIFT] + [M]" para definir os valores e parâmetros a serem
+  utilizados nesse template. Após, pressione "[F5]" para usar o Script abaixo.
 
---use ElfaVs982_DVP
+  ===================================================================================
+   Pequena Descrição do Script
+  ===================================================================================
 
-DECLARE @table_name SYSNAME
-SELECT @table_name = 'dbo.Tab_Rel_GerenteEstado'
+  Script que serve como auxílio para obter a criação de uma tabela.
+
+  Referência: https://stackoverflow.com/questions/706664/generate-sql-create-scripts-for-existing-tables-with-query
+
+******************************************************************************/
+
+DECLARE @TableName AS SYSNAME = '<Nome da Tabela, SYSNAME, >'
 
 DECLARE 
-      @object_name SYSNAME
-    , @object_id INT
+  @ObjectName SYSNAME
+, @ObjectID   INT
 
 SELECT 
-      @object_name = '[' + s.name + '].[' + o.name + ']'
-    , @object_id = o.[object_id]
-FROM sys.objects o WITH (NOWAIT)
-JOIN sys.schemas s WITH (NOWAIT) ON o.[schema_id] = s.[schema_id]
-WHERE s.name + '.' + o.name = @table_name
+  @ObjectName = '[' + s.name + '].[' + o.name + ']'
+, @ObjectID = o.[object_id]
+FROM
+  sys.objects o WITH (NOWAIT)
+    INNER JOIN
+  sys.schemas s WITH (NOWAIT)
+      ON o.[schema_id] = s.[schema_id]
+WHERE s.name + '.' + o.name = @TableName
     AND o.[type] = 'U'
     AND o.is_ms_shipped = 0
 
@@ -28,14 +36,15 @@ DECLARE @SQL VARCHAR(MAX) = ''
 ;WITH index_column AS 
 (
     SELECT 
-          ic.[object_id]
-        , ic.index_id
-        , ic.is_descending_key
-        , ic.is_included_column
-        , c.name
-    FROM sys.index_columns ic WITH (NOWAIT)
-    JOIN sys.columns c WITH (NOWAIT) ON ic.[object_id] = c.[object_id] AND ic.column_id = c.column_id
-    WHERE ic.[object_id] = @object_id
+      ic.[object_id]
+    , ic.index_id
+    , ic.is_descending_key
+    , ic.is_included_column
+    , c.name
+    FROM
+      sys.index_columns ic WITH (NOWAIT)
+        INNER JOIN sys.columns c WITH (NOWAIT) ON ic.[object_id] = c.[object_id] AND ic.column_id = c.column_id
+    WHERE ic.[object_id] = @ObjectID
 ),
 fk_columns AS 
 (
@@ -46,9 +55,9 @@ fk_columns AS
     FROM sys.foreign_key_columns k WITH (NOWAIT)
     JOIN sys.columns rc WITH (NOWAIT) ON rc.[object_id] = k.referenced_object_id AND rc.column_id = k.referenced_column_id 
     JOIN sys.columns c WITH (NOWAIT) ON c.[object_id] = k.parent_object_id AND c.column_id = k.parent_column_id
-    WHERE k.parent_object_id = @object_id
+    WHERE k.parent_object_id = @ObjectID
 )
-SELECT @SQL = 'CREATE TABLE ' + @object_name + CHAR(13) + '(' + CHAR(13) + STUFF((
+SELECT @SQL = 'CREATE TABLE ' + @ObjectName + CHAR(13) + '(' + CHAR(13) + STUFF((
     SELECT CHAR(9) + ', [' + c.name + '] ' + 
         CASE WHEN c.is_computed = 1
             THEN 'AS ' + cc.[definition] 
@@ -73,7 +82,7 @@ SELECT @SQL = 'CREATE TABLE ' + @object_name + CHAR(13) + '(' + CHAR(13) + STUFF
     LEFT JOIN sys.computed_columns cc WITH (NOWAIT) ON c.[object_id] = cc.[object_id] AND c.column_id = cc.column_id
     LEFT JOIN sys.default_constraints dc WITH (NOWAIT) ON c.default_object_id != 0 AND c.[object_id] = dc.parent_object_id AND c.column_id = dc.parent_column_id
     LEFT JOIN sys.identity_columns ic WITH (NOWAIT) ON c.is_identity = 1 AND c.[object_id] = ic.[object_id] AND c.column_id = ic.column_id
-    WHERE c.[object_id] = @object_id
+    WHERE c.[object_id] = @ObjectID
     ORDER BY c.column_id
     FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 2, CHAR(9) + ' ')
     + ISNULL((SELECT CHAR(9) + ', CONSTRAINT [' + k.name + '] PRIMARY KEY (' + 
@@ -87,11 +96,11 @@ SELECT @SQL = 'CREATE TABLE ' + @object_name + CHAR(13) + '(' + CHAR(13) + STUFF
                          FOR XML PATH(N''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 2, ''))
             + ')' + CHAR(13)
             FROM sys.key_constraints k WITH (NOWAIT)
-            WHERE k.parent_object_id = @object_id 
+            WHERE k.parent_object_id = @ObjectID 
                 AND k.[type] = 'PK'), '') + ')'  + CHAR(13)
     + ISNULL((SELECT (
         SELECT CHAR(13) +
-             'ALTER TABLE ' + @object_name + ' WITH' 
+             'ALTER TABLE ' + @ObjectName + ' WITH' 
             + CASE WHEN fk.is_not_trusted = 1 
                 THEN ' NOCHECK' 
                 ELSE ' CHECK' 
@@ -122,14 +131,14 @@ SELECT @SQL = 'CREATE TABLE ' + @object_name + CHAR(13) + '(' + CHAR(13) + STUFF
                 WHEN fk.update_referential_action = 3 THEN ' ON UPDATE SET DEFAULT'  
                 ELSE '' 
               END 
-            + CHAR(13) + 'ALTER TABLE ' + @object_name + ' CHECK CONSTRAINT [' + fk.name  + ']' + CHAR(13)
+            + CHAR(13) + 'ALTER TABLE ' + @ObjectName + ' CHECK CONSTRAINT [' + fk.name  + ']' + CHAR(13)
         FROM sys.foreign_keys fk WITH (NOWAIT)
         JOIN sys.objects ro WITH (NOWAIT) ON ro.[object_id] = fk.referenced_object_id
-        WHERE fk.parent_object_id = @object_id
+        WHERE fk.parent_object_id = @ObjectID
         FOR XML PATH(N''), TYPE).value('.', 'NVARCHAR(MAX)')), '')
     + ISNULL(((SELECT
          CHAR(13) + 'CREATE' + CASE WHEN i.is_unique = 1 THEN ' UNIQUE' ELSE '' END 
-                + ' NONCLUSTERED INDEX [' + i.name + '] ON ' + @object_name + ' (' +
+                + ' NONCLUSTERED INDEX [' + i.name + '] ON ' + @ObjectName + ' (' +
                 STUFF((
                 SELECT ', [' + c.name + ']' + CASE WHEN c.is_descending_key = 1 THEN ' DESC' ELSE ' ASC' END
                 FROM index_column c
@@ -144,7 +153,7 @@ SELECT @SQL = 'CREATE TABLE ' + @object_name + CHAR(13) + '(' + CHAR(13) + STUFF
                         AND c.index_id = i.index_id
                     FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 2, '') + ')', '')  + CHAR(13)
         FROM sys.indexes i WITH (NOWAIT)
-        WHERE i.[object_id] = @object_id
+        WHERE i.[object_id] = @ObjectID
             AND i.is_primary_key = 0
             AND i.[type] = 2
         FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)')

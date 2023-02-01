@@ -1,7 +1,7 @@
--- [APAGUE ESSE COMENTÁRIO] Pressione "CTRL + SHIFT + M"
+-- [APAGUE ESSE COMENTÁRIO] (Dica: Pressione "CTRL + SHIFT + M")
 /**********************************************************************
 
-  Nome da Tabela: tr_<Nome da Trigger, , >
+  Nome da Trigger: tr_<Nome da Trigger, , >
   Sugestão de Nome do Script: XXX - Criar_Trigger_<Nome da Trigger, , >
 
   Descrição: <Breve descrição de para que serve essa Trigger, , >

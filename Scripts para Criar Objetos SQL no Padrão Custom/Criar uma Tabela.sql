@@ -1,9 +1,8 @@
+-- [APAGUE ESSE COMENTÁRIO] (Dica: Pressione "CTRL + SHIFT + M")
 /**********************************************************************
-  [APAGUE ESSE COMENTÁRIO] Sugestão de Nome do Script: XXX - Criar_Tabela_Tab_<Nome da Tabela, , >
-  [APAGUE ESSE COMENTÁRIO] Pressione CTRL + SHIFT + M para definir os parâmetros
-  [APAGUE ESSE COMENTÁRIO] e valores utilizado nesse template.
 
   Nome da Tabela: Tab_<Nome da Tabela, , >
+  Sugestão de Nome do Script: XXX - Criar_Tabela_<Nome da Tabela, , >
 
   Descrição: <(Não Obrigatório) Breve descrição de para que serve essa tabela, , >
 

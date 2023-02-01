@@ -9,6 +9,20 @@
   Esse Script serve como auxílio no desenvolvimento para as pendências que utilizam
   do "Integration Service" e "Mobile Service".
 
+
+  ===================================================================================
+   Comandos Auxiliares
+  ===================================================================================
+
+  Ver erros referentes ao serviço:
+  SELECT * FROM LogData
+  SELECT * FROM LogMovimento
+
+  SELECT * FROM TipoIntegracaoTransacao
+
+  Ver movimentos prontos para serem integrados:
+  SELECT * FROM Comun_Mov_Estoque
+
 **************************************************************************************/
 
 SELECT
@@ -17,7 +31,7 @@ SELECT
 , [EntidadeDaIntegracao].[int_IdEmpresaIntegracao]                                                                       AS [ID (Base da Integração)]
 , CASE WHEN [EntidadeDaIntegracao].fk_int_IdEmpresaLocal <> 0 THEN [EntidadeDaIntegracao].fk_int_IdEmpresaLocal ELSE NULL END AS [LocalEstoqueID (Base da Integração)]
 , [EntidadeDaIntegracao].[str_DescricaoEmpresa]                                                                          AS [Nome (Base da Integração)]
-, CASE WHEN str_IdFuncionario IS NULL THEN 'Empresa' ELSE 'Funcionário' END                                              AS [Tipo de Registro]
+, CASE WHEN str_IdFuncionario IS NULL THEN 'Empresa' ELSE 'Funcionário (Representante)' END                              AS [Tipo de Registro]
 , CASE WHEN str_IdFuncionario IS NULL THEN 'Tab_Empresa' ELSE 'Tab_Funcionários' END                                     AS [Tabela]
 FROM
   [Tab_Empresa_Integracao] AS [EntidadeDaIntegracao]
