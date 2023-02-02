@@ -1,4 +1,4 @@
-/******************************************************************************
+/**************************************************************************************
 
   Pressione "[CTRL] + [SHIFT] + [M]" para definir os valores e parâmetros a serem
   utilizados nesse template. Após, pressione "[F5]" para usar o Script abaixo.
@@ -11,10 +11,9 @@
 
   Referências: https://stackoverflow.com/questions/5873170/generate-class-from-database-table
 
-******************************************************************************/
+**************************************************************************************/
 
 DECLARE @TableName SYSNAME = '<Nome da Tabela, , >'
-
 DECLARE @Result VARCHAR(MAX) = ''
 SET @Result =
 '///<sumary>

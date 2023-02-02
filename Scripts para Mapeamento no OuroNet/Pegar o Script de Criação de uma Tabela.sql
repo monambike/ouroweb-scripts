@@ -1,4 +1,4 @@
-/******************************************************************************
+/**************************************************************************************
 
   Pressione "[CTRL] + [SHIFT] + [M]" para definir os valores e parâmetros a serem
   utilizados nesse template. Após, pressione "[F5]" para usar o Script abaixo.
@@ -11,7 +11,7 @@
 
   Referência: https://stackoverflow.com/questions/706664/generate-sql-create-scripts-for-existing-tables-with-query
 
-******************************************************************************/
+**************************************************************************************/
 
 DECLARE @TableName AS SYSNAME = '<Nome da Tabela, SYSNAME, >'
 

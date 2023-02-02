@@ -1,4 +1,4 @@
-/******************************************************************************
+/**************************************************************************************
 
   Pressione "[CTRL] + [SHIFT] + [M]" para definir os valores e parâmetros a serem
   utilizados nesse template. Após, pressione "[F5]" para usar o Script abaixo.
@@ -9,7 +9,7 @@
 
   Script que serve como auxílio ao mapeamento de entidades para o OuroNet.
 
-******************************************************************************/
+**************************************************************************************/
 
 DECLARE @NomeTabela AS VARCHAR(100) = '<Nome da Tabela para Mapear, SYS.TABLE, >'
 SELECT
