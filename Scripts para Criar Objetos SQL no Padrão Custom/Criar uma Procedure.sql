@@ -1,4 +1,4 @@
--- [APAGUE ESSE COMENTÁRIO] (Dica: Pressione "CTRL + SHIFT + M")
+/* [APAGUE ESSE COMENTÁRIO] (Dica: Pressione "CTRL + SHIFT + M") */
 /**********************************************************************
 
   Nome da Procedure: usp_<Nome da Procedure, , >

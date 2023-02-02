@@ -1,4 +1,4 @@
--- [APAGUE ESSE COMENTÁRIO] (Dica: Pressione "CTRL + SHIFT + M")
+/* [APAGUE ESSE COMENTÁRIO] (Dica: Pressione "CTRL + SHIFT + M") */
 /**********************************************************************
 
   Nome da Tabela: <Nome da Tabela, , >
@@ -12,7 +12,7 @@ IF NOT EXISTS (SELECT * FROM SYSCOLUMNS WHERE ID = OBJECT_ID('<Nome da Tabela, ,
   BEGIN
     PRINT 'Criando a(s) colunas(s) "<Nome da Coluna, , >"...'
 
-    -- Criar Bit
+    /* Criar Bit */
     ALTER TABLE <Nome da Tabela, , >
       ADD <Nome da Coluna, , > BIT NOT NULL CONSTRAINT DF_<Nome da Tabela, , >_<Nome da Coluna, , > DEFAULT 0
   END

@@ -37,21 +37,26 @@
 
 **************************************************************************************/
 
--- VER INTEGRAÇÕES CADASTRADAS
--- As integrações abaixo estão dispostas também na tela de "Configuração Farma".
--- Menu Superior > Integrações > Integração Farma > Configuração Farma
 
--- Integrações por Token - Web Service
+/**************************************************************************************
+
+  VER INTEGRAÇÕES CADASTRADAS
+  As integrações abaixo estão dispostas também na tela de "Configuração Farma".
+  Menu Superior > Integrações > Integração Farma > Configuração Farma
+
+**************************************************************************************/
+
+/* Integrações por Token - Web Service */
 SELECT a.str_Descricao, a.pk_int_FarmaConfig, a.fk_int_FarmaLayouts, a.int_IdEmpresa, a.int_IdLocalEstoque,
 a.pk_int_FarmaConfig, a.fk_int_FarmaLayouts, a.str_Descricao, a.str_Url, a.str_Url2, a.str_Token
 FROM Tab_FarmaConfig AS a WHERE a.int_TipoIntegracao = 1 ORDER BY a.str_Descricao
 
--- Integrações por Arquivo
+/* Integrações por Arquivo */
 SELECT a.str_Descricao, a.pk_int_FarmaConfig, a.fk_int_FarmaLayouts, a.int_IdEmpresa, a.int_IdLocalEstoque,
 a.str_DiretorioBackup, a.str_DiretorioEntrada, a.str_DiretorioErro, a.str_DiretorioSaida, a.str_DiretorioTemporario
 FROM Tab_FarmaConfig AS a WHERE a.int_TipoIntegracao = 2 ORDER BY a.str_Descricao
 
--- Integrações por WebApi
+/* Integrações por WebApi */
 SELECT a.str_Descricao, a.pk_int_FarmaConfig, a.fk_int_FarmaLayouts, a.int_IdEmpresa, a.int_IdLocalEstoque,
 a.str_Usuario, a.str_Senha, a.str_ClientSecret
 FROM Tab_FarmaConfig AS a WHERE a.int_TipoIntegracao = 3 ORDER BY a.str_Descricao

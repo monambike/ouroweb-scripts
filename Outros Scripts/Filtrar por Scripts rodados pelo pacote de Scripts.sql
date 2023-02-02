@@ -26,7 +26,6 @@ DECLARE
 , @ScriptInicioDataFinal   AS DATETIME = '<Filtrar por: Data Inicial, VARCHAR, >'
 , @ScriptSucesso           AS BIT      = '<Mostrar Apenas: Apenas Scripts Sucedidos, BIT, >'
 
-
 SELECT
   [str_NomeScript]                                             AS [Nome do Script]
 , [str_NomeCompleto]                                           AS [Caminho do Script]

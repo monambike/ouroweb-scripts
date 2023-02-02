@@ -1,4 +1,4 @@
--- [APAGUE ESSE COMENTÁRIO] (Dica: Pressione "CTRL + SHIFT + M")
+/* [APAGUE ESSE COMENTÁRIO] (Dica: Pressione "CTRL + SHIFT + M") */
 /*************************************************************************************
 
   Nome da Tabela: <Nome da View, , >
@@ -24,6 +24,7 @@ CREATE VIEW uvw_<Nome da View, , >
 AS
 
 /* Colocar código que estará dentro da view substituindo esse comentário */
+
 GO
 
 GRANT SELECT ON uvw_<Nome da View, , > TO PUBLIC

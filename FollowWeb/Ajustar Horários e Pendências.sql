@@ -13,9 +13,9 @@
 **************************************************************************************/
 
 DECLARE
-  @IdUsuario   AS INT      = 1226 -- (Meu usuário)
+  @IdUsuario   AS INT      = 1226 /* (Meu usuário) */
 , @IdPendencia AS INT      = ''
-, @Data        AS DATETIME = ''   -- Formato da Data [yyyy-MM-dd]
+, @Data        AS DATETIME = ''   /* Formato da Data [yyyy-MM-dd] */
 
 SELECT
   [pendenciahora].[IdPendenciaHoras] AS [IdPendenciaHoras]

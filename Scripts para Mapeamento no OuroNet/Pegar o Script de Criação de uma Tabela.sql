@@ -160,4 +160,4 @@ SELECT @SQL = 'CREATE TABLE ' + @ObjectName + CHAR(13) + '(' + CHAR(13) + STUFF(
     ), '')
 
 Select @SQL
---EXEC sys.sp_executesql @SQL
+/* EXEC sys.sp_executesql @SQL */

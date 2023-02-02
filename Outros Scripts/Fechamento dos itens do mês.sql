@@ -41,11 +41,14 @@
 **************************************************************************************/
 
 SELECT
-  [a].[pk_int_FechamentoMes]
-, [a].[bit_MesFechado]
-, *
+  [FechamentoMes].[pk_int_FechamentoMes]
+, [FechamentoMes].[str_DescricaoMes]      AS "Descrição do Fechamento"
+, [FechamentoMes].[bit_MesFechado]         AS "Mês foi Fechado"
+, [FechamentoMes].[int_Ano]                AS "Ano"
+, [FechamentoMes].[int_Mes]                AS "Mês"
+, [FechamentoMes].[dte_DataHoraFechamento] AS "Data e Hora do Fechamento"
 FROM
-  [FechamentoMes] a WITH(NOLOCK)
+  [FechamentoMes] WITH(NOLOCK)
 ORDER BY
   [dte_DataHoraFechamento] DESC
 

@@ -58,9 +58,6 @@
 
 **************************************************************************************/
 
--- ===================================================================================
---  Retornando Dados do Pedido
--- ===================================================================================
 SELECT
   [pedido].[pk_int_Mov_EpharmaMovePedido] AS [PK do Pedido]
 , [pedido].[dte_DataResposta]             AS [Data e Hora Resposta]
@@ -90,7 +87,6 @@ FROM
   FULL JOIN
   [Mov_EpharmaMovePedidoDadosClinicos]              AS [clinico]               ON [clinico].[fk_int_Mov_EpharmaMovePedido] = [pedido].[pk_int_Mov_EpharmaMovePedido]
 ORDER BY [dte_DataResposta] DESC
-
 
 /**************************************************************************************
 

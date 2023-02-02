@@ -46,14 +46,14 @@ WHERE
         OR CAST(IdMovimento AS VARCHAR) =    @IdMovimento)
   AND (@FoiPago IN ('', CHAR(60) + 'Filtrar por: Foi Pago, BIT, ' + CHAR(62))
         OR CAST(FoiPago     AS VARCHAR) =    @FoiPago)
-  --(IdMovimento IN (0))
+  /* (IdMovimento IN (0)) */
 
 /**************************************************************************************
-  
-  -- Tabela com as situações (ocorrências do título) para cada banco
+
+  Tabela com as situações (ocorrências do título) para cada banco:
   SELECT * FROM [Tab_RetornoMensagemBanco]
 
-  -- Update para permitir ler novamente o arquivo retorno
+  Update para permitir ler novamente o arquivo retorno:
   UPDATE
     [Mov_Financeiro]
   SET
@@ -62,8 +62,8 @@ WHERE
   , [DataEntradaCaixa]          = NULL
   , [bit_TituloBaixadoPeloCNAB] = 0
   WHERE
-    [IdMovimento] IN (39111,39112) -- Colocar o "CR" aqui
-    AND [FoiPago] = 1              -- Olhando somente movimentos que não foram pagos para ler
-                                   -- novamente o arquivo retorno
+    [IdMovimento] IN (39111,39112) /* Colocar o "CR" aqui */
+    AND [FoiPago] = 1              /* Olhando somente movimentos que não foram pagos para ler
+                                      novamente o arquivo retorno */
 
 **************************************************************************************/
