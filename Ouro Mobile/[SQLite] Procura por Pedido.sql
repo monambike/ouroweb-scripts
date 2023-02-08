@@ -15,7 +15,7 @@
   ===================================================================================
 
   Esse Script só pode ser usado em consultas para o SQLite, no qual é pautado o banco
-  de dados do Ouro Mobile..
+  de dados que é contruído pelo aplicativo Ouro Mobile.
 
 **************************************************************************************/
 
@@ -54,11 +54,14 @@ FROM
   [Pedido]
   INNER JOIN
   [Cliente]         ON [Cliente].[pk_int_Cliente]                 = [Pedido].[fk_int_Cliente]
-  LEFT JOIN
+  INNER JOIN
   [TipoFaturamento] ON [TipoFaturamento].[pk_int_TipoFaturamento] = [Pedido].[fk_int_TipoFaturamento]
 WHERE
-  ([Pedido].[int_PedidoStatus]  = 2  /* Envio Pendente */ OR [Pedido].[int_PedidoStatus]  = 4 /*Erro*/)
-  AND [Pedido].[str_IdFuncionario] = 'sis'
+  1=1
+  --AND ([Pedido].[int_PedidoStatus]  = 2  /* Envio Pendente */ OR [Pedido].[int_PedidoStatus]  = 4 /*Erro*/)
+  AND [Pedido].[str_IdFuncionario] = 'sis' /* ID do funcionário na OuroBase, por favor refira-se ao Script
+                                              "Consultas com Informações Úteis" em "Integration Service e
+                                              Ouro Mobile Service" para mais fácil utilização */
   AND [Pedido].[int_IdEmpresa]     = 1
 ORDER BY
   [Nº Doc] DESC

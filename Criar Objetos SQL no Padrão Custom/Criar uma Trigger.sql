@@ -4,9 +4,9 @@
   Nome da Trigger: tr_<Nome da Trigger, , >
   Sugestão de Nome do Script: XXX - Criar_Trigger_<Nome da Trigger, , >
 
-  Descrição: <Breve descrição de para que serve essa Trigger, , >
+  Descrição: <(Opcional) Breve descrição de para que serve ou onde é chamado, , >
 
-  OBS: <(Não Obrigatório) Telas onde é usada e outras informações e anotações adicionais, , >
+  OBS: <(Opcional) Outras informações relevantes e anotações adicionais, , >
 
 **********************************************************************/
 

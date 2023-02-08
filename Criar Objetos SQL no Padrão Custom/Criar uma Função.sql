@@ -1,10 +1,12 @@
 /* [APAGUE ESSE COMENTÁRIO] (Dica: Pressione "CTRL + SHIFT + M") */
 /******************************************************************************
 
-  Nome da Função: <Nome da Função, , >
-  Sugestão de Nome do Script: XXX - Criar_Funcao_<Nome da Função, , >
+  Nome da Função: ufn_<Nome da Função, , >
+  Sugestão de Nome do Script: XXX - Criar_Funcao_ufn_<Nome da Função, , >
 
-  Descrição: <Breve descrição de para que serve essa função, , >
+  Descrição: <(Opcional) Breve descrição de para que serve ou onde é chamado, , >
+
+  OBS: <(Opcional) Outras informações relevantes e anotações adicionais, , >
 
 *******************************************************************************/
 

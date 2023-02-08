@@ -2,11 +2,11 @@
 /**********************************************************************
 
   Nome da Procedure: usp_<Nome da Procedure, , >
-  Sugestão de Nome do Script: XXX - Criar_Procedure_<Nome da Procedure, , >
+  Sugestão de Nome do Script: XXX - Criar_Procedure_usp_<Nome da Procedure, , >
 
-  Descrição: <(Opcional) Breve descrição de para que serve essa procedure, , >
+  Descrição: <(Opcional) Breve descrição de para que serve ou onde é chamado, , >
 
-  OBS: <(Opcional) Telas e lugares onde é usada e outras informações e anotações adicionais, , >
+  OBS: <(Opcional) Outras informações relevantes e anotações adicionais, , >
 
 **********************************************************************/
 

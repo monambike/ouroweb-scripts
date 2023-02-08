@@ -15,7 +15,7 @@
   ===================================================================================
 
   Esse Script só pode ser usado em consultas para o SQLite, no qual é pautado o banco
-  de dados do Ouro Mobile..
+  de dados que é contruído pelo aplicativo Ouro Mobile.
 
 **************************************************************************************/
 
@@ -36,4 +36,5 @@ FROM
   INNER JOIN
   [ProdutoValor] ON [ProdutoValor].[fk_int_Produto]  = [PedidoItens].[fk_int_Produto]
 WHERE
-  [Pedido].[int_NumeroOrcamento] = 28
+  1=1
+  --AND [Pedido].[int_NumeroOrcamento] = @ID
