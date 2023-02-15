@@ -57,8 +57,8 @@ DEALLOCATE Erro
 
 IF NOT EXISTS(SELECT * FROM #Erros)
   PRINT 'Essa pendência não possui nenhum erro.'
-ELSE IF EXISTS(SELECT * FROM #Erros) AND @MostrarApenasErrosNaoCorrigidos = 1
-  PRINT 'Essa pendência possui alguns erros mas nenhum a ser corrigido. Para visualizar os erros não corrigidos defina o parâmetro ''@MostrarApenasErrosNaoCorrigidos'' como ''0''.'
+ELSE IF NOT EXISTS(SELECT * FROM #Erros) AND @MostrarApenasErrosNaoCorrigidos = 1
+  PRINT 'Essa pendência não possui erros a serem corrigidos. Para visualizar possíveis erros não corrigidos defina o parâmetro ''@MostrarApenasErrosNaoCorrigidos'' como ''0''.'
 ELSE
 BEGIN
   -- =============================================
