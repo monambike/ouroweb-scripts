@@ -65,7 +65,8 @@ ORDER BY CAST([pendenciahora].[HoraInicio] AS TIME)
   [ATUALIZAR PENDENCIA]
   [Trocar a Pasta]
   BEGIN TRAN UPDATE Pendencias SET IdNode = 1656 WHERE IdPendencia = '<(Alterar) ID da Pendência, INT, >'
-
+  [Ajustar Hora de Conclusão]
+  BEGIN TRAN UPDATE Pendencias SET ChatCliente = 'Vinicius Gabriel - 30/12/2022 - 16:30:38 -> Concluído', DataConclusao = '2022-12-30 16:30:38.000' WHERE IdPendencia = @IdPendencia
 
                               COMMIT            ROLLBACK                               
 
