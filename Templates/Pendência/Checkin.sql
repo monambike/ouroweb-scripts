@@ -13,6 +13,7 @@
 
 SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
 SET NOCOUNT ON
+USE [FollowWeb]
 DECLARE @PendenciaId AS INT = <ID da Pendencia, INT, >
 
 -- =============================================
