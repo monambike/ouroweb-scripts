@@ -33,7 +33,7 @@
   CRIAR PASTAS DA INTEGRAÇÕES POR ARQUIVO
   Pressione "[Windows] + [R]" e cole o comando abaixo para criar as pastas da
   integração (Lembre-se de informar o caminho com "[CTRL] + [SHIFT] + [M]"):
-  CMD /c "MD <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Backup <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Entrada <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Erro <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\NFE <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Saida <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\TMP & START <Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>
+  CMD /c MD "<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Backup" "<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Entrada" "<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Erro" "<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\NFE" "<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Saida" "<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\TMP" & START "" "<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>"
 
 **************************************************************************************/
 

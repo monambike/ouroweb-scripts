@@ -22,7 +22,7 @@ DECLARE @PendenciaId AS INT = <ID da Pendencia, INT, >
 -- =============================================
 -- Cursor para percorrer os registros
 DECLARE Requisito CURSOR LOCAL FOR
-  SELECT [pk_int_Requisito], [str_Nome] FROM [Requisito] WHERE [fk_int_Pendencia] = @PendenciaId  
+  SELECT [pk_int_Requisito], [str_Nome] FROM [Requisito] WHERE [fk_int_Pendencia] = @PendenciaId ORDER BY [Requisito].[pk_int_Requisito]
 OPEN Requisito
   DECLARE @RequisitoID AS VARCHAR(MAX), @RequisitoAssunto AS VARCHAR(MAX)
   FETCH NEXT FROM Requisito INTO @RequisitoID, @RequisitoAssunto

@@ -49,8 +49,10 @@ FROM
   [CasoTeste_Erros] AS [Erro] ON [CasoTeste].[pk_int_CasoTeste] = [Erro].[fk_int_CasoTeste]
 WHERE
       (CAST([CasoTeste].[int_pendencia] AS VARCHAR) = @PendenciaId)
-  AND (@AlsoShowFixedErrors IN ('', CHAR(60) + 'Também Mostrar Erros Já Corrigidos, BIT, ' + CHAR(62), '0')
-        OR [Erro].[bit_Corrigido] = 0)
+  AND ((@AlsoShowFixedErrors IN ('', CHAR(60) + 'Também Mostrar Erros Já Corrigidos, BIT, ' + CHAR(62), '0') AND [Erro].[bit_Corrigido] = 0)
+        OR [Erro].[bit_Corrigido] = 0 AND [Erro].[bit_Corrigido] = 1)
+ORDER BY
+  [Erro].[pk_int_CasoTeste_Erros]
 
 /* Montando o template de acordo com os erros retornados para a pendência selecionada */
 DECLARE Erro CURSOR LOCAL FOR
