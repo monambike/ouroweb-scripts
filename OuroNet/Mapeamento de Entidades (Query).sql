@@ -106,7 +106,7 @@ FROM
   SYS.TABLES  AS b WITH(NOLOCK)
       ON a.object_id = b.object_id
     INNER JOIN
-  sys.TYPES   AS c WITH(NOLOCK)
+  SYS.TYPES   AS c WITH(NOLOCK)
       ON a.user_type_id = c.user_type_id
 WHERE
   b.name = @NomeTabela
