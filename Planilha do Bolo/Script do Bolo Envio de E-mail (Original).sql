@@ -1,10 +1,65 @@
-﻿USE msdb
+﻿/**************************************************************************************
+
+  ===================================================================================
+   Script Short Description
+  ===================================================================================
+
+  This Script was created to send an email to someone who owes a cake at OuroWeb.
+
+  We have a spreadsheet where we do the control, a macro was created so that when the
+  spreadsheet was saved a copy was created in a CSV file.
+
+  This copy is read by this Script, its data is polished, and then the e-mail is sent
+  according to the date and status of the contact list.
+
+  ===================================================================================
+   Spreadsheet File
+  ===================================================================================
+
+  The file is in the same folder as this Script.
+
+  ===================================================================================
+   Copy Of The Code From The Spreadsheet
+  ===================================================================================
+
+  Option Explicit
+
+  Private Sub Workbook_Open()
+    Application.EnableEvents = True
+  End Sub
+
+  Private Sub Workbook_BeforeSave(ByVal SaveAsUI As Boolean, Cancel As Boolean)
+    Call ExportWorksheetAndSaveAsCSV
+  End Sub
+
+  Public Sub ExportWorksheetAndSaveAsCSV()
+
+    Dim wbkExport As Workbook
+    Dim shtToExport As Worksheet
+
+    Set shtToExport = ThisWorkbook.Worksheets("Sheet1")     'Sheet to export as CSV
+    Set wbkExport = Application.Workbooks.Add
+    shtToExport.Copy Before:=wbkExport.Worksheets(wbkExport.Worksheets.Count)
+    Application.DisplayAlerts = False                       'Possibly overwrite without asking
+    
+    Dim CsvFileName As String
+    CsvFileName = Replace(ThisWorkbook.FullName, ".xlsm", ".csv")
+  
+    wbkExport.SaveAs Filename:=CsvFileName, FileFormat:=xlCSV
+    Application.DisplayAlerts = True
+    wbkExport.Close SaveChanges:=False
+  End Sub
+
+**************************************************************************************/
+
+SET NOCOUNT ON
+USE msdb
 GO
 
 /* SETTINGS */
 DECLARE
   @PlanilhaDoBoloOriginalPath AS VARCHAR(MAX) = 'C:\TMP\PlanilhaBolo2023.csv'
-, @PlanilhaDoBoloBackupPath AS VARCHAR(MAX) = 'C:\TMP\PlanilhaBolo2023.xlsx'
+, @PlanilhaDoBoloBackupPath AS VARCHAR(MAX) = 'C:\TMP\PlanilhaBolo2023.xlsm'
 
 /* READS CSV FILE WITH RAW CONTENT FROM CONTACT LIST */
 IF OBJECT_ID('tempdb..#ExcelContent') IS NOT NULL DROP TABLE #ExcelContent
@@ -20,9 +75,9 @@ DECLARE @Contact TABLE
 , [Name]      VARCHAR(MAX)
 , [Email]     VARCHAR(MAX)
 , [Status]    VARCHAR(MAX)
-, [CakeDate]  VARCHAR(MAX)
+, [CakeDate]  DATE
 )
-INSERT INTO @Contact ([Name], [Email], [CakeDate], [Status]) SELECT [Name], [Email], [CakeDate], [Status] FROM #ExcelContent
+INSERT INTO @Contact ([Name], [Email], [CakeDate], [Status]) SELECT [Name], [Email], CONVERT(date, [CakeDate], 103), [Status] FROM #ExcelContent
 SELECT * FROM @Contact
 SELECT * FROM #ExcelContent
 
@@ -35,6 +90,8 @@ SELECT * FROM #ExcelContent
 DECLARE @CurrentContactId BIGINT, @MaxId BIGINT
 SELECT @CurrentContactId=MIN([ContactId]), @MaxId=MAX([ContactId]) FROM @Contact WHERE [Status] = 'EM DÉBITO'
 DECLARE @TodayDate AS DATE = CAST(GETDATE() AS DATE)
+/* Saving list of contacts that are owing a cake */
+DECLARE @ContactInDebtList AS VARCHAR(MAX) = '', @EmailSentContactCount AS INT = 0
 /* For each selected contact send one e-mail according its status */
 WHILE @CurrentContactId <= @MaxId
 BEGIN
@@ -47,8 +104,6 @@ BEGIN
   , @Status    = [Status]
   FROM @Contact WHERE [ContactId] = @CurrentContactId
 
-  /* Lista de pessoas que estão devendo o bolo */
-  DECLARE @ContactInDebtList AS VARCHAR(MAX), @EmailSentContactCount AS INT = 0
   IF @Status = 'EM DÉBITO'
     BEGIN
       /* Making e-mail body */
@@ -91,18 +146,18 @@ BEGIN
 
       SET @EmailBodyContactInDebt = '<html><body>' + @EmailBodyContactInDebt + '</body></html>'
 
+      DECLARE @FileAttachments VARCHAR(MAX) = @PlanilhaDoBoloBackupPath + ';C:\TMP\FiladoBolo\bolo_pulando_feliz.png'
+      EXEC sp_send_dbmail
+        @profile_name     = 'SQL Profile'
+      , @Recipients       = @Email
+      , @Subject          = 'Pagamento do Bolo!!'
+      , @Body             = @EmailBodyContactInDebt
+      , @Body_Format      = 'HTML'
+      , @file_attachments = @FileAttachments
+      PRINT 'Enviado e-mail para "' + @FirstName + '" com endereço "' + @Email + '"!'
+
       SET @ContactInDebtList += '&#9997; Nome: ' + @FirstName + CHAR(13) + CHAR(10) + '&#9993; Email: ' +  @Email + ';' + CHAR(13) + CHAR(10) +  + CHAR(13) + CHAR(10)
       SET @EmailSentContactCount += 1
-      DECLARE @FileAttachments VARCHAR(MAX) = @PlanilhaDoBoloBackupPath + ';C:\TMP\FiladoBolo\bolo_pulando_feliz.png'
-      --EXEC sp_send_dbmail
-      --  @profile_name     = 'SQL Profile'
-      --, @Recipients       = @Email
-      --, @Subject          = 'Pagamento do Bolo!!'
-      --, @Body             = @EmailBodyContactInDebt
-      --, @Body_Format      = 'HTML'
-      --, @file_attachments = @FileAttachments
-
-      PRINT 'Foi enviado um e-mail para "' + @FirstName + '" com endereço "' + @Email + '"!'
     END
   SELECT @CurrentContactId = MIN([ContactId]) FROM @Contact where [ContactId] > @CurrentContactId
 END
@@ -116,47 +171,20 @@ IF @EmailSentContactCount > 0
     IF @EmailSentContactCount > 1 SET @Plural = 's'
 
     DECLARE @EmailBodySendingInfo AS VARCHAR(MAX) =
-      '<p>Foi enviado e-mail da fila do bolo para ' + @EmailSentContactCount + ' o'+@Plural+' contato'+@Plural+' listado'+@Plural+' abaixo:<p>'
+      '<p>Foi enviado e-mail da fila do bolo para ' + CAST(@EmailSentContactCount AS VARCHAR(MAX)) + ' contato'+@Plural+' listado'+@Plural+' abaixo:<p>'
     + CHAR(13) + CHAR(10)
     + CHAR(13) + CHAR(10) + @ContactInDebtList
 
+    DECLARE @ViniciusEmail AS VARCHAR(MAX) = 'dvp10@ouroweb.com.br', @MarcosEmail VARCHAR(MAX) = 'dvp07@ouroweb.com.br'
+    DECLARE @ViniciusEMarcosEmail AS VARCHAR(MAX) = @ViniciusEmail + ',' + @MarcosEmail
     EXEC sp_send_dbmail
       @profile_name     = 'SQL Profile'
-    , @Recipients       = 'dvp07@ouroweb.com.br;dvp10@ouroweb.com.br'
+    --, @Recipients       = @ViniciusEMarcosEmail
+    , @Recipients       = @ViniciusEmail
     , @Subject          = 'Lista de E-mails Enviados'
     , @Body             = @EmailBodySendingInfo
     , @Body_Format      = 'HTML'
+
+    PRINT 'Foi enviado o e-mail para ' + CAST(@EmailSentContactCount AS VARCHAR(MAX)) + ' contato'+@Plural+' e também foi enviado um e-mail para quem gerencia a fila do bolo.'
   END
-
-
-/*
-
-Option Explicit
-
-Private Sub Workbook_Open()
-  Application.EnableEvents = True
-End Sub
-
-Private Sub Workbook_BeforeSave(ByVal SaveAsUI As Boolean, Cancel As Boolean)
-  Call ExportWorksheetAndSaveAsCSV
-End Sub
-
-Public Sub ExportWorksheetAndSaveAsCSV()
-
-  Dim wbkExport As Workbook
-  Dim shtToExport As Worksheet
-
-  Set shtToExport = ThisWorkbook.Worksheets("Sheet1")     'Sheet to export as CSV
-  Set wbkExport = Application.Workbooks.Add
-  shtToExport.Copy Before:=wbkExport.Worksheets(wbkExport.Worksheets.Count)
-  Application.DisplayAlerts = False                       'Possibly overwrite without asking
-    
-  Dim CsvFileName As String
-  CsvFileName = Replace(ThisWorkbook.FullName, ".xlsm", ".csv")
-  
-  wbkExport.SaveAs Filename:=CsvFileName, FileFormat:=xlCSV
-  Application.DisplayAlerts = True
-  wbkExport.Close SaveChanges:=False
-End Sub
-
-*/
+ELSE PRINT 'Não foi enviado nenhum e-mail pois não há contatos em débito.'
