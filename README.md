@@ -18,6 +18,8 @@ Scripts to facilitate search, understanding, and management for testing and deve
 
 :closed_lock_with_key: Scripts to facilitate permission search and permission groups;
 
+:cake: Cake Spreadsheet: Procedure for sending e-mail for those who are in debt with owing a cake;
+
 :gear: Scripts to facilitate configuration search;
 
 There are also some utilities, such as preventing OuroWeb from freezing at startup by avoiding the execution of the monthly item closure procedure, and facilitating the creation of scripts for creating functions, procedures, columns, and tables in the OuroWeb standard.
