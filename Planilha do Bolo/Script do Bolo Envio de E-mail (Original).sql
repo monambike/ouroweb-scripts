@@ -39,7 +39,6 @@
   End Sub
 
   Public Sub ExportWorksheetAndSaveAsCSV()
-
     Dim wbkExport As Workbook
     Dim shtToExport As Worksheet
 
@@ -47,13 +46,16 @@
     Set wbkExport = Application.Workbooks.Add
     shtToExport.Copy Before:=wbkExport.Worksheets(wbkExport.Worksheets.Count)
     Application.DisplayAlerts = False                       'Possibly overwrite without asking
-    
+
     Dim CsvFileName As String
     CsvFileName = Replace(ThisWorkbook.FullName, ".xlsm", ".csv")
-  
+
     wbkExport.SaveAs Filename:=CsvFileName, FileFormat:=xlCSV
     Application.DisplayAlerts = True
     wbkExport.Close SaveChanges:=False
+
+    MsgBox ("O arquivo CSV foi gerado e os e-mails poderão ser agora enviados para os contatos em débito." _
+    & vbNewLine & "Lembre-se de atualizar também a planilha sem macro (xlsx) que é disposta ao público.")
   End Sub
 
 **************************************************************************************/

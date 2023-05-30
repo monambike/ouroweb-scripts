@@ -29,8 +29,9 @@
   , [str_DiretorioNF]         = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\NFE'
   , [str_DiretorioSaida]      = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\Saida'
   , [str_DiretorioTemporario] = '<Pasta da Integração:, VARCHAR(MAX), C:\FTP\NomeIntegracao>\TMP'
-  WHERE pk_int_FarmaConfig = PKIntFarmaConfig
+  WHERE pk_int_FarmaConfig = @PkIntFarmaConfig
 
+                                COMMIT         ROLLBACK                              
 
   ===================================================================================
    Criar Pastas Das Integrações Por Arquivo

@@ -26,7 +26,7 @@ SELECT
 FROM
   [Tab_Empresa]       AS [Empresa]
   INNER JOIN
-  [Tab_LocaisEstoque] AS [LocalEstoque] ON [LocalEstoque].IDEmpresa = [Empresa].IdEmpresa
+  [Tab_LocaisEstoque] AS [LocalEstoque] ON [LocalEstoque].[IdEmpresa] = [Empresa].[IdEmpresa]
   INNER JOIN
   [Tab_Cidades]       AS [Cidade]       ON [Cidade].[IdCidade] = [Empresa].[IdCidade]
 ORDER BY
