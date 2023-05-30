@@ -1,16 +1,16 @@
 # Scripts da Custom :file_cabinet:	
 
-Scripts to facilitate search, understanding, and management for testing and development in some OuroWeb applications, including:
+Scripts to facilitate search, understanding, and management for testing and development in some OuroWeb applications, including the following.
 
-:woman_judge: CCE - configuration, integrator sites, and login credentials;
+:woman_judge: CCE: configuration, integrator sites, and login credentials;
 
-:bank: CNAB - view titles and allow a title to be downloaded again in CNAB reading to generate another return file;
+:bank: CNAB: view titles and allow a title to be downloaded again in CNAB reading to generate another return file;
 
-:spiral_calendar: FollowWeb - view and modify schedules, and add pending tasks to someone's folder;
+:spiral_calendar: FollowWeb: view and modify schedules, and add pending tasks to someone's folder;
 
-:clipboard: Central Reports - facilitate the search for reports and add a report to the menu;
+:clipboard: Central Reports: facilitate the search for reports and add a report to the menu;
 
-:chains: Farma Integration - configure paths, create integration folders, and enable movement for automatic routine processing;
+:chains: Farma Integration: configure paths, create integration folders, and enable movement for automatic routine processing;
 
 :closed_lock_with_key: Scripts to facilitate permission search and permission groups;
 
