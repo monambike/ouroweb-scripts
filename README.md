@@ -1,28 +1,28 @@
 # Scripts da Custom :file_cabinet:	
 
-Scripts para facilitar a busca, entendimento e gerenciamento para teste e desenvolvimento em alguns aplicativos da OuroWeb incluindo:
+Scripts to facilitate search, understanding, and management for testing and development in some OuroWeb applications, including:
 
-:woman_judge: CCE, configuração, sites dos integradores e credenciais para logar;
+:woman_judge: CCE - configuration, integrator sites, and login credentials;
 
-:bank: CNAB; visualizar títulos e fazer com que um título possa ser baixado novamente na leitura do CNAB para gerar outro arquivo de retorno;
+:bank: CNAB - view titles and allow a title to be downloaded again in CNAB reading to generate another return file;
 
-:spiral_calendar: FollowWeb, fazer a visualização e alteração dos horários e colocar pendência na pasta de alguém;
+:spiral_calendar: FollowWeb - view and modify schedules, and add pending tasks to someone's folder;
 
-:clipboard: Central Reports, facilitar a busca por relatórios e adicionar um relatório no menu;
+:clipboard: Central Reports - facilitate the search for reports and add a report to the menu;
 
-:chains: Integração Farma, configurar caminhos e criar as pastas da integração e liberar o movimento para processamento da rotina do automático;
+:chains: Farma Integration - configure paths, create integration folders, and enable movement for automatic routine processing;
 
-:closed_lock_with_key: Scripts para facilitar a busca por permissão e grupos de permissão;
+:closed_lock_with_key: Scripts to facilitate permission search and permission groups;
 
-:gear: Scripts para facilitar a busca por configuração;
+:gear: Scripts to facilitate configuration search;
 
-Também há alguns utilitários como evitar travamento do OuroWeb na inicialização evitando com que seja executada a procedure de fechamento dos itens do mês e facilitar a criação de Scripts de criação de função, procedure, coluna e tabela no padrão OuroWeb.
+There are also some utilities, such as preventing OuroWeb from freezing at startup by avoiding the execution of the monthly item closure procedure, and facilitating the creation of scripts for creating functions, procedures, columns, and tables in the OuroWeb standard.
 
-## IMAGENS
+## IMAGES
 
 ![image](https://github.com/monambike/scripts-da-custom/assets/35270174/e56a10e2-46e9-4287-8bc3-476865b3396c)
 
-### Planilha do Bolo
+### Cake Spreadsheet
 
 ![20230427-1-Adiantado](https://github.com/monambike/scripts-da-custom/assets/35270174/d4a08f03-e3c5-47c7-b751-56462ee075d9)
 ![20230427-2-No Dia](https://github.com/monambike/scripts-da-custom/assets/35270174/9f6a215c-b7f5-423a-9769-48516874f237)
