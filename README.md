@@ -10,7 +10,11 @@ Scripts to facilitate search, understanding, and management for testing and deve
 
 :clipboard: Central Reports: facilitate the search for reports and add a report to the menu;
 
-:chains: Farma Integration: configure paths, create integration folders, and enable movement for automatic routine processing;
+:chains: Farma, EPharma and Alcis Integration: configure paths, create integration folders, and enable movement for automatic routine processing;
+
+:receipt: NFE: Paths and basic application configuration;
+
+:iphone: OuroMobile: Scripts to help on OuroWeb mobile application;
 
 :closed_lock_with_key: Scripts to facilitate permission search and permission groups;
 
