@@ -11,15 +11,17 @@
 
   BEGIN TRAN UPDATE ConfiguracaoNFE
   SET
-    str_DiretorioXMLTrans    = '<Caminho da NFE, , C\NFE\Todos>'
-  , str_DiretorioXMLError    = '<Caminho da NFE, , C\NFE\Todos>'
-  , str_DiretorioXMLExport   = '<Caminho da NFE, , C\NFE\Todos>'
-  , str_PathLogoRetrato      = '<Caminho da NFE, , C\NFE\Todos>'
-  , str_DiretorioPdfNFE      = '<Caminho da NFE, , C\NFE\Todos>'
-  , str_DiretorioXMLCanceled = '<Caminho da NFE, , C\NFE\Todos>'
-  , str_DiretorioXMLCompra   = '<Caminho da NFE, , C\NFE\Todos>'
-  , str_DiretorioXMLCCE      = '<Caminho da NFE, , C\NFE\Todos>'
-  WHERE fk_int_id_Empresa = '<Empresa para atualizar caminho da NFE, , >'
+    str_DiretorioXMLTrans                    = '<Caminho da NFE, , C\NFE\Todos>'
+  , str_DiretorioXMLError                    = '<Caminho da NFE, , C\NFE\Todos>'
+  , str_DiretorioXMLExport                   = '<Caminho da NFE, , C\NFE\Todos>'
+  , str_PathLogoRetrato                      = '<Caminho da NFE, , C\NFE\Todos>'
+  , str_DiretorioPdfNFE                      = '<Caminho da NFE, , C\NFE\Todos>'
+  , str_DiretorioXMLCanceled                 = '<Caminho da NFE, , C\NFE\Todos>'
+  , str_DiretorioXMLCompra                   = '<Caminho da NFE, , C\NFE\Todos>'
+  , str_DiretorioXMLCCE                      = '<Caminho da NFE, , C\NFE\Todos>'
+  , str_DiretorioXmlNotasInutilizadas        = '<Caminho da NFE, , C\NFE\Todos>'
+  , str_DiretorioXmlRetornoNotasInutilizadas = '<Caminho da NFE, , C\NFE\Todos>'
+  WHERE fk_int_id_Empresa = @IdEmpresa
 
                                 COMMIT         ROLLBACK                              
 
