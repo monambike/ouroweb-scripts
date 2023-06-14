@@ -1,8 +1,8 @@
 /* [APAGUE ESSE COMENTÁRIO] (Dica: Pressione "CTRL + SHIFT + M") */
 /*************************************************************************************
 
-  Nome da Tabela: <Nome da View, , >
-  Sugestão de Nome do Script: XXX - Criar_View_<Nome da View, , >
+  Nome da View: uvw_<Nome da View, , >
+  Sugestão de Nome do Script: XXX - Criar_View_uvw_<Nome da View, , >
 
   Descrição: <(Opcional) Breve descrição de para que serve ou onde é chamado, , >
 
