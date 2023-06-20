@@ -13,7 +13,7 @@
 IF EXISTS (SELECT * FROM SYSOBJECTS WHERE TYPE = 'V' AND NAME = 'uvw_<Nome da View, , >')
   BEGIN
     PRINT 'Removendo a view "uvw_<Nome da View, , >"...'
-      DROP VIEW uvw_<Nome da View, , >
+    DROP VIEW uvw_<Nome da View, , >
   END
 GO
 
